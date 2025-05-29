@@ -2,41 +2,29 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>XV Valeria Rocha</title>
   <style>
-    .container {
-      position: relative;
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+    }
+
+    .portada {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100vw;
       height: 100vh;
-      overflow: hidden;
-    }
-    .portada {
-      width: 100%;
-      height: 100%;
       object-fit: cover;
-      display: block;
-    }
-    .invisible-button {
-      position: absolute;
-      top: 48%;
-      left: 51.5%;
-      color: azure;
-      transform: translate(-50%, -50%);
-      width: 100px;
-      height: 50px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      z-index: 10;
-      display: block;
-      text-decoration: none;
+      opacity: 0.6; /* Ajusta la transparencia (0 completamente transparente, 1 opaco) */
+      filter: brightness(80%) grayscale(20%); /* Palidez o efectos de color */
+      z-index: -1; /* Para que quede detrás de cualquier contenido */
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <img src="fondo_rosas.jpg" alt="Rosas" class="portada" />
-  </div>
+  <img src="fondo_rosas-pica.png" alt="Rosas" class="portada" />
 </body>
 </html>
