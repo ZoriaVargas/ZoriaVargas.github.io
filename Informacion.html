@@ -2,59 +2,58 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>XV Valeria Rocha</title>
   <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
     html, body {
-      margin: 0;
-      padding: 0;
       height: 100%;
       width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       font-family: sans-serif;
+      overflow-x: hidden;
     }
 
-    .portada {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
+    .container {
       height: 100vh;
-      object-fit: cover;
-      opacity: 0.6;
-      filter: brightness(80%) grayscale(20%);
-      z-index: -1;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
     }
 
-    .divisiones {
-      background-color: rgba(193, 161, 223, 0.8); /* Color con transparencia */
-      padding: 20px;
-      text-align: center;
-      border-radius: 20px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      width: 90%;
-      max-width: 500px;
-      height: auto;
+    .background-top,
+    .background-bottom {
+      width: 100%;
+      flex: 1 1 50vh; /* toma mitad altura */
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: contain; /* mostrar imagen completa */
+      background-color: #c1a1df;
+      filter: brightness(0.8) grayscale(0.2);
     }
 
-    h1 {
-      margin: 0;
-      font-size: 6vw; /* Tamaño relativo para móviles */
+    .background-top {
+      background-image: url('Sesion_ft_1.jpg');
     }
 
-    @media (min-width: 768px) {
-      h1 {
-        font-size: 2em;
+    .background-bottom {
+      background-image: url('fondo_rosas-pica.png');
+    }
+
+    /* Media queries para móviles pequeños */
+    @media (max-width: 480px) {
+      .background-top,
+      .background-bottom {
+        flex-basis: 200px; /* altura mínima en móviles */
       }
     }
   </style>
 </head>
 <body>
-  <img src="fondo_rosas-pica.png" alt="Rosas" class="portada" />
-  <div class="divisiones">
-    <h1>HOLAAAAAAAAA</h1>
+  <div class="container">
+    <div class="background-top"></div>
+    <div class="background-bottom"></div>
   </div>
 </body>
 </html>
