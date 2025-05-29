@@ -4,19 +4,39 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>XV Valeria Rocha</title>
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .portada {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .invisible-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100px;
+      height: 50px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 10;
+      display: block;
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <img src="sobre_portada.jpg" alt="Portada de XV Valeria Rocha" class="portada" />
-    <h1>XV Años de Valeria Rocha</h1>
-    <p class="mensaje">
-      Te invito a celebrar mis XV años<br />
-      con mucha alegría, música y amor.
-    </p>
-    <p class="fecha">📅 Sábado 20 de Julio, 2025</p>
-    <p class="lugar">📍 Salón Jardín Esmeralda, Monterrey</p>
-    <p class="footer">¡Esperamos contar contigo! 💖</p>
+    <a href="Informacion.html" class="invisible-button" aria-label="Ir a la invitación">Abreme</a>
   </div>
 </body>
 </html>
