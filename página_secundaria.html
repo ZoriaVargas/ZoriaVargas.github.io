@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sec#31</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .encabezado{
+            background-color: lightblue;
+            padding: 40px;
+            margin: 10px;
+            border: 1px solid blue;
+        }
+        .banner {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px 40px;
+            border-radius: 10px;
+            font-size: 24px;
+            transition: opacity 0.5s ease;
+        }
+        .fade-out {
+            opacity: 0;
+        }
+        .container2 {
+            display: flex; /* Utiliza flexbox para colocar los divs en fila */
+            gap: 5px; /* Espacio entre los divs */
+            flex-wrap: wrap; /* Permite que los botones se ajusten en varias filas */
+            justify-content: center;
+        }
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: #4CAF50; /* Color de fondo */
+            border: 1px solid #333; /* Bordes para visibilidad */
+        }
+        .infoButton {
+            font-size: 20px; /* Tamaño de fuente */
+            padding: 30px 60px; /* Espaciado interno */
+            background-color: #5aecaf; /* Color de fondo */
+            color: white; /* Color del texto */
+            border: none; /* Sin borde */
+            border-radius: 5px; /* Bordes redondeados */
+            cursor: pointer; /* Cambia el cursor al pasar por encima */
+            transition: background-color 0.3s; /* Transición suave para el color de fondo */
+            text-align: center; /* Centra el texto */
+        }
+
+        .infoButton:hover {
+            background-color: #0056b3; /* Color de fondo al pasar el ratón */
+        }
+
+        #info {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            text-align: center; /* Centra el texto */
+        }
+        .imagen-redondeada {
+            width: 60px; /* Ancho de la imagen */
+            height: 60px; /* Alto de la imagen */
+            border-radius: 20px; /* Radio de redondeo */
+            border: 2px solid #ccc; /* Borde opcional */
+        }
+        .neo{
+            background-color: #33af6d;
+            height: 50;
+            text-align: center;
+        }
+    </style>
+</head>
+<body style="background-color: black;">
+    <header>
+        <div class="content">
+
+            <div class="menu container">
+                <a href="#" class="logo">ESC. SEC. TEC. #31 "Dr Saenz"</a>
+                <input type="checkbox" id="menu">
+                <label for="menu">
+                    <img src="imagenes/menu.png" alt=".">
+                </label>
+                <nav class="navbar">
+                    <ul>
+                        <li><a href="#Inicio"> Inicio </a></li>
+                        <li><a href="#Servicios"> Servicios </a></li>
+                        <li><a href="#"> Productos </a></li>
+                        <li><a href="#"> contacto </a></li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+    </header>
+    <br>
+    <br>
+    <br>
+
+    <br>
+
+<div class="container2">
+    <button class="infoButton" data-price="20" data-description="Plátano: Rico en potasio y perfecto para un snack." data-flavor="Dulce y cremoso.">
+        <img src="imagenes/platano.jfif" alt="platano_imagen" class="imagen-redondeada">
+        <br>
+        Plátano $20
+    </button>
+
+    <button class="infoButton" data-price="49" data-description="Fresas: Dulces y jugosas, ideales para ensaladas y postres." data-flavor="Dulce y ligeramente ácido.">
+        <img src="imagenes/fresa.jfif" alt="fresa_imagen" class="imagen-redondeada">
+        <br>
+        Fresas $49
+    </button>
+
+    <button class="infoButton" data-price="30" data-description="Uva: Pequeñas y llenas de sabor, perfectas para compartir." data-flavor="Dulce y jugosa.">
+        <img src="imagenes/uva.jfif" alt="uva_imagen" class="imagen-redondeada">
+        <br>
+        Uva $30
+    </button>
+
+    <button class="infoButton" data-price="18" data-description="Sandía: Refrescante y dulce, ideal para el verano." data-flavor="Muy dulce y acuosa.">
+        <img src="imagenes/sandia.jfif" alt="sandia_imagen" class="imagen-redondeada">
+        <br>
+        Sandía $18
+    </button>
+
+    <button class="infoButton" data-price="45" data-description="Manzana: Crocante y jugosa, excelente para bocadillos." data-flavor="Dulce y refrescante.">
+        <img src="imagenes/descarga.jfif" alt="manzana_imagen" class="imagen-redondeada">
+        <br>
+        Manzana $45
+    </button>
+
+</div>
+
+<div id="info">Selecciona un botón para ver el precio</div>
+
+<script>
+    const buttons = document.querySelectorAll('.infoButton');
+    const info = document.getElementById('info');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            const price = button.getAttribute('data-price');
+            const description = button.getAttribute('data-description');
+            const flavor = button.getAttribute('data-flavor');
+
+            // Muestra la descripción, el precio y el sabor
+            info.textContent = `Precio: $${price}. ${description} Sabor: ${flavor}`;
+
+            info.style.display = 'block'; // Muestra el mensaje
+            
+            // Oculta el mensaje después de 5 segundos
+            setTimeout(() => {
+                info.style.display = 'none';
+            }, 50000);
+        });
+    });
+
+</script>
+
+<section id="Inicio">
+    <div class="neo">
+        <h4>Romanticismo</h4>
+    </div>
+</section>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<section id="Servicios">
+    <div class="neo">
+        <h4>Servicios</h4>
+    </div>
+</section>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</body>
+</html>
