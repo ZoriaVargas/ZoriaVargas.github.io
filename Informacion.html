@@ -6,142 +6,160 @@
   <title>XV Frida Rocha</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --rosa-claro: #fbe8f1;
+      --rosa-intenso: #d26a8a;
+      --violeta: #9c6dd1;
+      --blanco: #fff;
+      --sombra: rgba(0, 0, 0, 0.15);
+    }
+
     html, body {
-      margin: 0; padding: 0; height: 100%; width: 100%;
+      margin: 0;
+      padding: 0;
+      height: 100%;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #f7e8ff, #e0c8ff);
+      background: linear-gradient(135deg, var(--rosa-claro), #f5d7ff);
       color: #3a2f5a;
-      overflow-x: hidden;
+      scroll-behavior: smooth;
     }
 
     .half-screen {
       position: relative;
-      overflow: hidden;
       width: 100vw;
-      height: 130vh; /* altura original */
-
+      height: 100vh;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    .section-hidden {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+
+    .section-visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .half-screen img {
       position: absolute;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: brightness(60%) saturate(1.2);
-      opacity: 0.9;
-      transition: filter 0.4s ease;
+      opacity: 0.7;
+      filter: brightness(0.6);
       z-index: 1;
+      transition: filter 0.4s ease;
     }
 
     .half-screen:hover img {
-      filter: brightness(80%) saturate(1);
+      filter: brightness(0.8);
     }
 
     .divisiones {
       position: relative;
-      z-index: 10;
-      padding: 40px 50px;
+      z-index: 2;
+      padding: 40px;
+      max-width: 420px;
+      width: 90%;
       border-radius: 30px;
       text-align: center;
-      overflow: hidden;
-      max-width: 90%;
-      width: 420px;
-    }
-
-    .divisiones::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-color: #fff;
-      opacity: 0.5;
-      border-radius: 30px;
-      z-index: -1;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 24px var(--sombra);
+      animation: fadeIn 1.5s ease both;
+      border: 1px solid rgba(255, 255, 255, 0.3);
     }
 
     .divisiones h1 {
-      margin: 0 0 15px 0;
-      font-size: 7vw;
-      color: #b76e79;
+      margin: 0 0 20px;
       font-family: 'Great Vibes', cursive;
-      text-shadow: 2px 2px 8px rgba(255,255,255,0.85);
-      font-weight: 900;
-      letter-spacing: 0.05em;
-      line-height: 1.1;
-      transition: color 0.3s ease;
+      font-size: 3.2em;
+      color: var(--rosa-intenso);
+      text-shadow: 1px 1px 10px rgba(255,255,255,0.6);
     }
 
     .divisiones h1:last-child {
-      font-size: 6vw;
-      margin-bottom: 25px;
-    }
-
-    @media (min-width: 768px) {
-      .divisiones h1 {
-        font-size: 4.2em;
-      }
-      .divisiones h1:last-child {
-        font-size: 3.5em;
-      }
+      font-size: 2.8em;
+      margin-bottom: 30px;
     }
 
     #contador {
-      margin-top: 25px;
-      font-size: 1.5em;
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: 0.04em;
-      padding: 12px 20px;
-      border-radius: 50px;
-      background: linear-gradient(90deg, #b76e79, #b76e79);
-      box-shadow: 0 4px 12px rgba(138, 109, 230, 0.6);
-      user-select: none;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    #contador:hover {
-      background: linear-gradient(90deg, #8e6de6, #b388eb);
-      box-shadow: 0 6px 16px #b76e79;
-      cursor: default;
+      font-size: 1.4em;
+      padding: 10px 20px;
+      border-radius: 25px;
+      background: linear-gradient(90deg, var(--violeta), var(--rosa-intenso));
+      color: white;
+      box-shadow: 0 4px 14px var(--sombra);
+      margin-bottom: 25px;
+      animation: pulse 3s infinite ease-in-out;
     }
 
     audio {
-      margin-top: 20px;
       width: 100%;
-      outline: none;
       border-radius: 15px;
-      box-shadow: 0 3px 8px rgba(138, 109, 230, 0.4);
-      background: rgba(255,255,255,0.7);
+      background-color: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    @media (max-width: 400px) {
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 12px rgba(210, 106, 138, 0.4);
+      }
+      50% {
+        transform: scale(1.03);
+        box-shadow: 0 0 20px rgba(210, 106, 138, 0.7);
+      }
+    }
+
+    @media (max-width: 500px) {
       .divisiones {
-        padding: 30px 20px;
-        width: 90vw;
+        padding: 25px 20px;
       }
+
       .divisiones h1 {
-        font-size: 10vw;
+        font-size: 2.5em;
       }
+
       .divisiones h1:last-child {
-        font-size: 8vw;
+        font-size: 2.2em;
+      }
+
+      #contador {
+        font-size: 1.2em;
       }
     }
   </style>
 </head>
 <body>
 
+  <!-- Pantalla 1 -->
   <div class="half-screen">
     <img src="Sesion_ft_1.jpg" alt="Sesión Foto" />
     <div class="divisiones">
       <h1>Mis XV años</h1>
       <h1>Frida Rocha</h1>
       <div id="contador">Calculando...</div>
-      <!-- Barra de audio -->
       <audio controls>
         <source src="tu-audio.mp3" type="audio/mpeg" />
         Tu navegador no soporta audio.
@@ -149,10 +167,12 @@
     </div>
   </div>
 
+  <!-- Pantalla 2 -->
   <div class="half-screen">
     <img src="fondo_rosas-pica.png" alt="Fondo Rosas" />
     <div class="divisiones">
-      <!-- Vacío o contenido extra -->
+      <h1>Te esperamos</h1>
+      <h1>con todo el corazón</h1>
     </div>
   </div>
 
@@ -160,30 +180,24 @@
     function calcularTiempo() {
       const ahora = new Date();
       const añoActual = ahora.getFullYear();
+      let fechaEvento = new Date(`${añoActual}-08-13T17:00:00`);
 
-      // Fecha fija del evento: 13 de agosto a las 18:00
-      let fechaEvento = new Date(`${añoActual}-08-13T18:00:00`);
-
-      // Si ya pasó, usar fecha del próximo año
       if (ahora > fechaEvento) {
-        fechaEvento = new Date(`${añoActual + 1}-08-13T18:00:00`);
+        fechaEvento = new Date(`${añoActual + 1}-08-13T17:00:00`);
       }
 
       const msRestantes = fechaEvento - ahora;
-
       if (msRestantes <= 0) {
         document.getElementById("contador").innerText = "¡El evento ha llegado!";
         return;
       }
 
       const segundosTotales = Math.floor(msRestantes / 1000);
-
       const dias = Math.floor(segundosTotales / (60 * 60 * 24));
       const horas = Math.floor((segundosTotales % (60 * 60 * 24)) / (60 * 60));
       const minutos = Math.floor((segundosTotales % (60 * 60)) / 60);
 
       let resultado = "Faltan ";
-
       if (dias > 0) resultado += `${dias} ${dias === 1 ? "día" : "días"}, `;
       if (horas > 0) resultado += `${horas} ${horas === 1 ? "hora" : "horas"}, `;
       resultado += `${minutos} ${minutos === 1 ? "minuto" : "minutos"}`;
@@ -192,9 +206,27 @@
     }
 
     calcularTiempo();
-    setInterval(calcularTiempo, 60 * 1000); // actualizar cada minuto
+    setInterval(calcularTiempo, 60000); // cada minuto
+
+    // Transición entre secciones
+    const secciones = document.querySelectorAll(".half-screen");
+
+    const observer = new IntersectionObserver((entradas) => {
+      entradas.forEach((entrada) => {
+        if (entrada.isIntersecting) {
+          entrada.target.classList.add("section-visible");
+          entrada.target.classList.remove("section-hidden");
+        }
+      });
+    }, {
+      threshold: 0.3
+    });
+
+    secciones.forEach((seccion) => {
+      seccion.classList.add("section-hidden");
+      observer.observe(seccion);
+    });
   </script>
 
 </body>
 </html>
-
