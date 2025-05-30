@@ -366,34 +366,46 @@
     }
 
     @media (max-width: 768px) {
+      /* Ajustes generales de contenedores */
       .divisiones {
-        width: 94%;
-        max-width: none;
+        width: 88%;
+        max-width: 400px;
         padding: 1.8rem;
         margin: 1rem auto;
         border-radius: 15px;
+      }
+
+      /* Ajuste específico para cada tipo de div */
+      .pantalla-inicial .divisiones {
+        width: 88%;
+        max-width: 400px;
+        padding: 1.8rem;
+        margin-top: 2rem;
+      }
+
+      .pantalla-rosgold .divisiones {
+        width: 88%;
+        max-width: 400px;
+        padding: 1.8rem;
+      }
+
+      .half-screen > .divisiones {
+        width: 88%;
+        max-width: 400px;
+        padding: 1.8rem;
+      }
+
+      /* Contenedor principal */
+      .half-screen {
+        padding: 0.5rem;
+        display: flex;
+        align-items: center;
       }
 
       .info-section {
         width: 100%;
         padding: 1.2rem;
         margin: 1rem 0;
-      }
-
-      .pantalla-inicial .divisiones {
-        width: 94%;
-        padding: 1.8rem;
-        margin-top: 2rem;
-      }
-
-      .pantalla-rosgold .divisiones {
-        width: 94%;
-        padding: 1.8rem;
-      }
-
-      .half-screen > .divisiones {
-        width: 94%;
-        padding: 1.8rem;
       }
 
       .mesa-regalos {
@@ -439,12 +451,6 @@
 
       #progressBar {
         width: 100%;
-      }
-
-      .half-screen {
-        padding: 0.5rem;
-        min-height: 100vh;
-        justify-content: center;
       }
 
       .divisiones h1 {
@@ -574,24 +580,42 @@
     }
 
     @media (max-width: 480px) {
-      .pantalla-inicial {
-        padding-top: 380px;
+      .divisiones {
+        width: 85%;
+        max-width: 350px;
+        padding: 1.5rem;
       }
 
-      .divisiones {
-        width: 96%;
+      .pantalla-inicial .divisiones,
+      .pantalla-rosgold .divisiones,
+      .half-screen > .divisiones {
+        width: 85%;
+        max-width: 350px;
         padding: 1.5rem;
+      }
+
+      .pantalla-inicial {
+        padding-top: 380px;
       }
     }
 
     @media (max-width: 360px) {
-      .pantalla-inicial {
-        padding-top: 320px;
+      .divisiones {
+        width: 82%;
+        max-width: 300px;
+        padding: 1.2rem;
       }
 
-      .divisiones {
-        width: 98%;
+      .pantalla-inicial .divisiones,
+      .pantalla-rosgold .divisiones,
+      .half-screen > .divisiones {
+        width: 82%;
+        max-width: 300px;
         padding: 1.2rem;
+      }
+
+      .pantalla-inicial {
+        padding-top: 320px;
       }
     }
 
