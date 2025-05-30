@@ -79,6 +79,11 @@
       border: 1px solid rgba(255, 255, 255, 0.3);
     }
 
+    /* Para bajarla visualmente */
+    .pantalla-inicial .divisiones {
+      margin-top: 200px;
+    }
+
     .divisiones h1 {
       margin: 0 0 20px;
       font-family: 'Great Vibes', cursive;
@@ -103,22 +108,49 @@
       animation: pulse 3s infinite ease-in-out;
     }
 
-    audio {
+    .custom-audio-controls {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 20px;
+      padding: 10px 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       width: 100%;
-      border-radius: 15px;
-      background-color: rgba(255, 255, 255, 0.7);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .custom-audio-controls button {
+      background: var(--violeta);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px var(--sombra);
+      transition: background 0.3s;
+    }
+
+    .custom-audio-controls button:hover {
+      background: var(--rosa-intenso);
+    }
+
+    #progressBar {
+      flex: 1;
+      appearance: none;
+      height: 6px;
+      border-radius: 3px;
+      background: linear-gradient(to right, var(--rosa-intenso), var(--violeta));
+      outline: none;
+      cursor: pointer;
     }
 
     @keyframes fadeIn {
-      0% {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      0% { opacity: 0; transform: translateY(40px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes pulse {
@@ -136,34 +168,56 @@
       .divisiones {
         padding: 25px 20px;
       }
-
       .divisiones h1 {
         font-size: 2.5em;
       }
-
       .divisiones h1:last-child {
         font-size: 2.2em;
       }
-
       #contador {
         font-size: 1.2em;
       }
+    }
+
+    /* Botón de inicio */
+    #autoPlayButton {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 12px 24px;
+      background: var(--rosa-intenso);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      z-index: 9999;
+      box-shadow: 0 4px 12px var(--sombra);
+    }
+
+    #autoPlayButton:hover {
+      background: var(--violeta);
     }
   </style>
 </head>
 <body>
 
+  <!-- Botón de inicio -->
+  <button id="autoPlayButton">Iniciar experiencia</button>
+
   <!-- Pantalla 1 -->
-  <div class="half-screen">
+  <div class="half-screen pantalla-inicial">
     <img src="Sesion_ft_1.jpg" alt="Sesión Foto" />
     <div class="divisiones">
       <h1>Mis XV años</h1>
       <h1>Frida Rocha</h1>
       <div id="contador">Calculando...</div>
-      <audio controls>
-        <source src="tu-audio.mp3" type="audio/mpeg" />
-        Tu navegador no soporta audio.
-      </audio>
+      <audio id="miAudio" src="lana del rey - salvatore (philipz flip).mp3"></audio>
+      <div class="custom-audio-controls">
+        <button id="playPauseBtn" title="Reproducir/Pausar">▶️</button>
+        <input type="range" id="progressBar" value="0" min="0" max="100" />
+        <button id="resetBtn" title="Reiniciar canción">🔁</button>
+      </div>
     </div>
   </div>
 
@@ -181,7 +235,6 @@
       const ahora = new Date();
       const añoActual = ahora.getFullYear();
       let fechaEvento = new Date(`${añoActual}-08-13T17:00:00`);
-
       if (ahora > fechaEvento) {
         fechaEvento = new Date(`${añoActual + 1}-08-13T17:00:00`);
       }
@@ -206,11 +259,9 @@
     }
 
     calcularTiempo();
-    setInterval(calcularTiempo, 60000); // cada minuto
+    setInterval(calcularTiempo, 60000);
 
-    // Transición entre secciones
     const secciones = document.querySelectorAll(".half-screen");
-
     const observer = new IntersectionObserver((entradas) => {
       entradas.forEach((entrada) => {
         if (entrada.isIntersecting) {
@@ -218,15 +269,60 @@
           entrada.target.classList.remove("section-hidden");
         }
       });
-    }, {
-      threshold: 0.3
-    });
+    }, { threshold: 0.3 });
 
     secciones.forEach((seccion) => {
       seccion.classList.add("section-hidden");
       observer.observe(seccion);
     });
-  </script>
 
+    const audio = document.getElementById("miAudio");
+    const playPauseBtn = document.getElementById("playPauseBtn");
+    const progressBar = document.getElementById("progressBar");
+    const resetBtn = document.getElementById("resetBtn");
+
+    playPauseBtn.addEventListener("click", () => {
+      if (audio.paused) {
+        audio.play();
+        playPauseBtn.textContent = "⏸️";
+      } else {
+        audio.pause();
+        playPauseBtn.textContent = "▶️";
+      }
+    });
+
+    resetBtn.addEventListener("click", () => {
+      audio.currentTime = 0;
+      if (audio.paused) {
+        audio.play();
+        playPauseBtn.textContent = "⏸️";
+      }
+    });
+
+    audio.addEventListener("timeupdate", () => {
+      const progress = (audio.currentTime / audio.duration) * 100;
+      progressBar.value = progress;
+    });
+
+    progressBar.addEventListener("input", () => {
+      const time = (progressBar.value / 100) * audio.duration;
+      audio.currentTime = time;
+    });
+
+    // Autoplay con botón
+    document.getElementById("autoPlayButton").addEventListener("click", () => {
+      audio.play().then(() => {
+        document.getElementById("autoPlayButton").remove();
+        playPauseBtn.textContent = "⏸️";
+      }).catch(() => {
+        alert("Debes permitir el sonido en tu navegador.");
+      });
+    });
+
+    // Manejo si el audio no carga
+    audio.addEventListener("error", () => {
+      alert("No se pudo cargar la canción. Asegúrate de que el archivo MP3 esté en la carpeta del proyecto.");
+    });
+  </script>
 </body>
 </html>
