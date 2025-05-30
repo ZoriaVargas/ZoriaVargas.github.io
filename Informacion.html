@@ -29,6 +29,7 @@
       width: 100vw;
       height: 150vh;
       display: flex;
+      flex-direction: column; /* ← esta línea es clave */
       align-items: center;
       justify-content: center;
       overflow: hidden;
@@ -36,6 +37,7 @@
       transform: translateY(0);
       transition: opacity 1s ease-out, transform 1s ease-out;
     }
+
 
     .section-hidden {
       opacity: 0;
@@ -208,7 +210,7 @@
 
     /* Solo para las imágenes específicas: corona y pie */
     .divisiones img[alt="diseño"] {
-      max-width: 200px;
+      max-width: 700px;
       height: auto;
       display: block;
       margin: 10px auto 10px; /* centrar y ajustar espacio arriba y abajo */
@@ -216,7 +218,26 @@
       top: -10px; /* sube la imagen 10px */
     }
     /* Solo al segundo .divisiones dentro del segundo .half-screen */
+    
+    .half-screen:nth-of-type(2) .divisiones img[alt="diseño"] {
+      max-width: 300px; /* más grandes */
+      top: -10px;
+      margin-bottom: 20px;
+    }
     .half-screen:nth-of-type(2) .divisiones {
+      max-width: 700px; /* o el ancho que quieras */
+      margin-top: 120px;
+      border-radius: 30px;
+
+    }
+    .divisiones .nombre {
+      color: white;
+      text-shadow: black;
+    }
+    .half-screen:nth-of-type(2) {
+      height: 150vh;
+    }
+    .half-screen:nth-of-type(3) .divisiones {
       margin-top: 120px; /* baja ese div específico */
       background-color: rosegold;
       /* mantener border-radius y demás para que se vea bien */
@@ -224,11 +245,51 @@
       /* Opcional: ajustar color texto si el fondo lo requiere */
       color: #b76e79; /* o blanco si prefieres más contraste */
     }
-    .half-screen:nth-of-type(2) .divisiones img[alt="diseño"] {
-      max-width: 300px; /* más grandes */
-      top: -10px;
-      margin-bottom: 20px;
+    html {
+      scroll-behavior: smooth;
     }
+    .divisiones > * {
+      transition: all 0.5s ease;
+    }
+    .nombre {
+      color: white;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    }
+    #autoPlayButton {
+      animation: pulse 2s infinite ease-in-out;
+    }
+    .half-screen::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.4));
+      z-index: 1;
+    }
+    .custom-audio-controls button {
+      padding: 10px;
+    }
+    #contador {
+      animation: glow 4s ease-in-out infinite;
+    }
+    @keyframes glow {
+      0%, 100% {
+        text-shadow: 0 0 10px var(--rosa-intenso);
+      }
+      50% {
+        text-shadow: 0 0 20px var(--violeta);
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -264,8 +325,20 @@
       <h1>En este día tan especial, desde lo más profundo de mi alma quiero agradecer a mis padres por su amor incondicional, apoyo en cada paso de mi vida y cada esfuerzo y sacrificio que han hecho para que este momento sea tan hermoso e inolvidable </h1>
       <h1>con todo el corazón</h1>
       <img src="pie.png" alt="diseño">
+      <h1 class="nombre">Carmen Janeth Torres Luna</h1>
+      <h1 class="nombre">Juan Miguel Rocha Velazco</h1>
     </div>
   </div>
+
+  <div class="half-screen pantalla-rosgold-2">
+    <div class="divisiones">
+      <img src="corona.png" alt="diseño">
+      <h1>En este día tan especial, desde lo más profundo de mi alma quiero agradecer a mis padres por su amor incondicional, apoyo en cada paso de mi vida y cada esfuerzo y sacrificio que han hecho para que este momento sea tan hermoso e inolvidable </h1>
+      <h1>con todo el corazón</h1>
+      <img src="pie.png" alt="diseño">
+      <h1 class="nombre">Carmen Janeth Torres Luna</h1>
+      <h1 class="nombre">Juan Miguel Rocha Velazco</h1>
+    </div>
 
   <script>
     function calcularTiempo() {
