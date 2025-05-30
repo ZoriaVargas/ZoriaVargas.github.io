@@ -1138,6 +1138,61 @@
         width: 90%;
       }
     }
+
+    /* Estilos específicos para las secciones de celebración y regalos */
+    .celebracion .divisiones,
+    .regalos .divisiones {
+      max-width: 500px;
+      width: 85%;
+    }
+
+    .celebracion .info-section,
+    .regalos .mesa-regalos {
+      max-width: 450px;
+      margin: 2rem auto;
+      padding: 2rem;
+    }
+
+    .regalo-item {
+      max-width: 400px;
+      margin: 1rem auto;
+    }
+
+    @media (max-width: 768px) {
+      .celebracion .divisiones,
+      .regalos .divisiones {
+        max-width: 380px;
+        width: 85%;
+      }
+
+      .celebracion .info-section,
+      .regalos .mesa-regalos {
+        max-width: 340px;
+        padding: 1.5rem;
+      }
+
+      .regalo-item {
+        max-width: 300px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .celebracion .divisiones,
+      .regalos .divisiones {
+        max-width: 320px;
+        width: 82%;
+      }
+
+      .celebracion .info-section,
+      .regalos .mesa-regalos {
+        max-width: 280px;
+        padding: 1.2rem;
+      }
+
+      .regalo-item {
+        max-width: 260px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1169,8 +1224,8 @@
     </div>
   </div>
 
-  <div class="half-screen">
-    <div class="divisiones" style="max-width: 600px;">
+  <div class="half-screen celebracion">
+    <div class="divisiones" style="max-width: 500px;">
       <h1 style="font-size: 3em;">Celebración</h1>
       
       <div class="info-section">
@@ -1272,8 +1327,8 @@
   </div>
 
   <!-- Nueva sección de Mesa de Regalos -->
-  <div class="half-screen">
-    <div class="divisiones" style="max-width: 800px;">
+  <div class="half-screen regalos">
+    <div class="divisiones" style="max-width: 500px;">
       <h1 style="font-size: 3em;">Mesa de Regalos</h1>
       
       <div class="mesa-regalos">
