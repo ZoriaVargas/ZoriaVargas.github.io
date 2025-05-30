@@ -27,7 +27,7 @@
     .half-screen {
       position: relative;
       width: 100vw;
-      height: 100vh;
+      height: 150vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -198,6 +198,41 @@
     #autoPlayButton:hover {
       background: var(--violeta);
     }
+
+    .divisiones img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto 15px; /* para separar un poco */
+    }
+
+    /* Solo para las imágenes específicas: corona y pie */
+    .divisiones img[alt="diseño"] {
+      max-width: 200px;
+      height: auto;
+      display: block;
+      margin: 10px auto 10px; /* centrar y ajustar espacio arriba y abajo */
+      position: relative;
+      top: -10px; /* sube la imagen 10px */
+    }
+    /* Solo al segundo .divisiones dentro del segundo .half-screen */
+    .half-screen:nth-of-type(2) .divisiones {
+      margin-top: 120px; /* baja ese div específico */
+      background-color: rosegold;
+      /* mantener border-radius y demás para que se vea bien */
+      border-radius: 30px;
+      /* Opcional: ajustar color texto si el fondo lo requiere */
+      color: #b76e79; /* o blanco si prefieres más contraste */
+    }
+    .half-screen:nth-of-type(2) .divisiones img[alt="diseño"] {
+      max-width: 300px; /* más grandes */
+      top: -10px;
+      margin-bottom: 20px;
+    }
+
+
+
+
   </style>
 </head>
 <body>
@@ -222,11 +257,13 @@
   </div>
 
   <!-- Pantalla 2 -->
-  <div class="half-screen">
+  <div class="half-screen pantalla-rosgold">
     <img src="fondo_rosas-pica.png" alt="Fondo Rosas" />
     <div class="divisiones">
-      <h1>Te esperamos</h1>
+      <img src="corona.png" alt="diseño">
+      <h1>En este día tan especial, desde lo más profundo de mi alma quiero agradecer a mis padres por su amor incondicional, apoyo en cada paso de mi vida y cada esfuerzo y sacrificio que han hecho para que este momento sea tan hermoso e inolvidable </h1>
       <h1>con todo el corazón</h1>
+      <img src="pie.png" alt="diseño">
     </div>
   </div>
 
