@@ -4,24 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>XV Valeria Rocha</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
   <style>
     html, body {
       margin: 0; padding: 0; height: 100%; width: 100%;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #fff;
       color: #333;
-      overflow-x: hidden; /* evitar scroll horizontal */
+      overflow-x: hidden;
     }
-    body {
-      margin: 0;
-      font-family: inherit;
-    }
+
     .half-screen {
       position: relative;
       overflow: hidden;
       width: 100vw;
-      height: 130vh; /* más alto que pantalla */
+      height: 130vh;
     }
+
     .half-screen img {
       position: absolute;
       top: 0; left: 0;
@@ -29,9 +28,10 @@
       height: 100%;
       object-fit: cover;
       filter: brightness(80%) grayscale(20%);
-      opacity: 0.6;
+      opacity: 0.8;
       transition: filter 0.3s ease;
     }
+
     .divisiones {
       position: absolute;
       top: 50%; left: 50%;
@@ -39,39 +39,90 @@
       max-width: 90%;
       width: 400px;
       padding: 30px 40px;
-      background-color: rgba(255, 255, 255, 0.75);
       border-radius: 25px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
       text-align: center;
       z-index: 10;
+      background-color: rgba(255, 255, 255, 0.75);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
+
     .divisiones h1 {
-      margin: 0;
-      font-size: 5vw;
+      margin: 10px 0;
+      font-size: 8vw;
       color: #4a2c72;
-      text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+      font-family: 'Great Vibes', cursive;
+      text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
       font-weight: 700;
     }
+
     @media (min-width: 768px) {
-      .divisiones {
-        width: 400px;
-        padding: 40px 50px;
-      }
       .divisiones h1 {
-        font-size: 2.5em;
+        font-size: 3.5em;
       }
+    }
+
+    #contador {
+      margin-top: 20px;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #444;
     }
   </style>
 </head>
 <body>
-  <div class="half-screen first">
+
+  <div class="half-screen">
     <img src="Sesion_ft_1.jpg" alt="Sesion Foto" />
     <div class="divisiones">
-      <h1>HOLAAAAAAAAA</h1>
+      <h1>Mis XV años</h1>
+      <h1>Frida Rocha</h1>
+      <div id="contador">Calculando...</div>
     </div>
   </div>
-  <div class="half-screen second">
+
+  <div class="half-screen">
     <img src="fondo_rosas-pica.png" alt="Fondo Rosas" />
   </div>
+
+  <script>
+    function calcularTiempo() {
+    const ahora = new Date();
+    const añoActual = ahora.getFullYear();
+
+    // Fecha del evento: 13 de agosto a las 18:00 (6 PM)
+    let fechaEvento = new Date(`${añoActual}-08-31T18:00:00`);
+
+    // Si ya pasó la fecha de este año, contar para el próximo año mismo día y hora
+    if (ahora > fechaEvento) {
+        fechaEvento = new Date(`${añoActual + 1}-08-13T18:00:00`);
+    }
+
+    const msRestantes = fechaEvento - ahora;
+
+    if (msRestantes <= 0) {
+        document.getElementById("contador").innerText = "¡El evento ha llegado!";
+        return;
+    }
+
+    const segundosTotales = Math.floor(msRestantes / 1000);
+
+    const dias = Math.floor(segundosTotales / (60 * 60 * 24));
+    const horas = Math.floor((segundosTotales % (60 * 60 * 24)) / (60 * 60));
+    const minutos = Math.floor((segundosTotales % (60 * 60)) / 60);
+
+    let resultado = "Faltan ";
+
+    if (dias > 0) resultado += `${dias} ${dias === 1 ? "día" : "días"}, `;
+    if (horas > 0) resultado += `${horas} ${horas === 1 ? "hora" : "horas"}, `;
+    resultado += `${minutos} ${minutos === 1 ? "minuto" : "minutos"}`;
+
+    document.getElementById("contador").innerText = resultado;
+    }
+
+    calcularTiempo();
+    setInterval(calcularTiempo, 60 * 1000); // actualizar cada minuto
+
+  </script>
+
 </body>
 </html>
