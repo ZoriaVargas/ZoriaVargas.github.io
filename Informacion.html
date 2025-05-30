@@ -42,7 +42,7 @@
       transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Ajuste específico solo para la primera pantalla */
+    /* Ajuste específico para la primera pantalla */
     .pantalla-inicial {
       justify-content: flex-start;
       padding-top: 700px;
@@ -367,11 +367,11 @@
 
     @media (max-width: 768px) {
       .divisiones {
-        width: 85%;
+        width: 94%;
         max-width: none;
-        padding: 1.5rem;
+        padding: 1.8rem;
         margin: 1rem auto;
-        border-radius: 20px;
+        border-radius: 15px;
       }
 
       .info-section {
@@ -381,18 +381,19 @@
       }
 
       .pantalla-inicial .divisiones {
-        width: 85%;
-        padding: 1.5rem;
+        width: 94%;
+        padding: 1.8rem;
+        margin-top: 2rem;
       }
 
       .pantalla-rosgold .divisiones {
-        width: 85%;
-        padding: 1.5rem;
+        width: 94%;
+        padding: 1.8rem;
       }
 
       .half-screen > .divisiones {
-        width: 85%;
-        padding: 1.5rem;
+        width: 94%;
+        padding: 1.8rem;
       }
 
       .mesa-regalos {
@@ -441,7 +442,9 @@
       }
 
       .half-screen {
-        padding: 1rem;
+        padding: 0.5rem;
+        min-height: 100vh;
+        justify-content: center;
       }
 
       .divisiones h1 {
@@ -570,30 +573,25 @@
       }
     }
 
-    @media (max-width: 360px) {
+    @media (max-width: 480px) {
+      .pantalla-inicial {
+        padding-top: 380px;
+      }
+
       .divisiones {
-        width: 92%;
-        padding: 1rem;
+        width: 96%;
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .pantalla-inicial {
+        padding-top: 320px;
       }
 
-      .info-section {
-        padding: 1rem;
-      }
-
-      .divisiones h1 {
-        font-size: 2em !important;
-      }
-
-      .divisiones h1:last-child {
-        font-size: 1.7em !important;
-      }
-
-      .custom-audio-controls {
-        flex-direction: column;
-      }
-
-      #progressBar {
-        width: 100%;
+      .divisiones {
+        width: 98%;
+        padding: 1.2rem;
       }
     }
 
