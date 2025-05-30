@@ -19,6 +19,10 @@
       overflow: hidden;
       width: 100vw;
       height: 130vh; /* altura original */
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .half-screen img {
@@ -38,18 +42,26 @@
     }
 
     .divisiones {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      max-width: 90%;
-      width: 420px;
+      position: relative;
+      z-index: 10;
       padding: 40px 50px;
       border-radius: 30px;
       text-align: center;
-      z-index: 10;
-      background-color: rgba(255, 255, 255, 0.85);
-      box-shadow: 0 8px 20px rgba(74, 44, 114, 0.3);
+      overflow: hidden;
+      max-width: 90%;
+      width: 420px;
+    }
+
+    .divisiones::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: #fff;
+      opacity: 0.5;
+      border-radius: 30px;
+      z-index: -1;
       backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
     .divisiones h1 {
@@ -98,6 +110,15 @@
       cursor: default;
     }
 
+    audio {
+      margin-top: 20px;
+      width: 100%;
+      outline: none;
+      border-radius: 15px;
+      box-shadow: 0 3px 8px rgba(138, 109, 230, 0.4);
+      background: rgba(255,255,255,0.7);
+    }
+
     @media (max-width: 400px) {
       .divisiones {
         padding: 30px 20px;
@@ -120,11 +141,19 @@
       <h1>Mis XV años</h1>
       <h1>Frida Rocha</h1>
       <div id="contador">Calculando...</div>
+      <!-- Barra de audio -->
+      <audio controls>
+        <source src="tu-audio.mp3" type="audio/mpeg" />
+        Tu navegador no soporta audio.
+      </audio>
     </div>
   </div>
 
   <div class="half-screen">
     <img src="fondo_rosas-pica.png" alt="Fondo Rosas" />
+    <div class="divisiones">
+      <!-- Vacío o contenido extra -->
+    </div>
   </div>
 
   <script>
@@ -168,3 +197,4 @@
 
 </body>
 </html>
+
