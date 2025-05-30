@@ -89,12 +89,12 @@
     const ahora = new Date();
     const añoActual = ahora.getFullYear();
 
-    // Fecha del evento: 13 de agosto a las 18:00 (6 PM)
-    let fechaEvento = new Date(`${añoActual}-08-31T18:00:00`);
+    // Fecha del evento: 31 de agosto a las 17:00 (5 PM)
+    let fechaEvento = new Date(`${añoActual}-08-31T17:00:00`);
 
     // Si ya pasó la fecha de este año, contar para el próximo año mismo día y hora
     if (ahora > fechaEvento) {
-        fechaEvento = new Date(`${añoActual + 1}-08-13T18:00:00`);
+        fechaEvento = new Date(`${añoActual + 1}-08-31T17:00:00`);
     }
 
     const msRestantes = fechaEvento - ahora;
