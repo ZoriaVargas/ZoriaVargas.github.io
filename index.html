@@ -2,42 +2,210 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>XV Valeria Rocha</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>XV Frida Rocha</title>
   <style>
+    /* Contenedor y fondo */
     .container {
       position: relative;
       width: 100vw;
       height: 100vh;
       overflow: hidden;
+      background: #000;
     }
+
     .portada {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      user-select: none;
     }
+
+    /* Botón con animación inicial y hover */
     .invisible-button {
       position: absolute;
-      top: 50%;
+      top: 58%;
       left: 55%;
-      color: azure;
       transform: translate(-50%, -50%);
-      width: 100px;
-      height: 50px;
-      background: transparent;
-      border: none;
+      width: 130px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.25);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.2em;
+      border: 2px solid #fff;
+      border-radius: 14px;
+      backdrop-filter: blur(6px);
       cursor: pointer;
       z-index: 10;
-      display: block;
+      text-align: center;
       text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeInBounce 1.8s ease forwards 0.7s;
+      transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+      user-select: none;
+    }
+
+    .invisible-button:hover {
+      animation: pulseGlow 2s infinite;
+      background: rgba(255, 255, 255, 0.35);
+      transform: translate(-50%, -50%) scale(1.1);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.7);
+    }
+
+    .invisible-button.disappear {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.7);
+      pointer-events: none;
+    }
+
+    /* Animaciones */
+    @keyframes fadeInBounce {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -30%) scale(0.8);
+      }
+      60% {
+        opacity: 1;
+        transform: translate(-50%, -55%) scale(1.05);
+      }
+      80% {
+        transform: translate(-50%, -50%) scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.7);
+      }
+      50% {
+        box-shadow: 0 0 40px rgba(255, 255, 255, 1);
+      }
+    }
+
+    /* Shake efecto */
+    @keyframes shake {
+      0%, 100% { transform: translate(-50%, -50%) translateX(0); }
+      25% { transform: translate(-50%, -50%) translateX(-5px); }
+      50% { transform: translate(-50%, -50%) translateX(5px); }
+      75% { transform: translate(-50%, -50%) translateX(-5px); }
+    }
+
+    .shake {
+      animation: shake 0.4s ease-in-out 2;
+    }
+
+    /* Animación página "rota" */
+    .page-break {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #111;
+      pointer-events: none;
+      z-index: 9999;
+      overflow: visible;
+    }
+
+    /* Fragmentos rotos */
+    .fragment {
+      position: absolute;
+      width: 25%;
+      height: 33.33%;
+      background: inherit;
+      background-repeat: no-repeat;
+      background-size: 400% 300%;
+      filter: drop-shadow(0 0 12px rgba(0,0,0,0.4));
+      animation-fill-mode: forwards;
+      opacity: 1;
+    }
+
+    /* Posiciones y background-position para 8 fragmentos */
+    .frag-0 { top: 0; left: 0; background-position: 0% 0%; animation: breakFrag0 1.2s ease forwards;}
+    .frag-1 { top: 0; left: 25%; background-position: 25% 0%; animation: breakFrag1 1.2s ease forwards;}
+    .frag-2 { top: 0; left: 50%; background-position: 50% 0%; animation: breakFrag2 1.2s ease forwards;}
+    .frag-3 { top: 0; left: 75%; background-position: 75% 0%; animation: breakFrag3 1.2s ease forwards;}
+    .frag-4 { top: 33.33%; left: 0; background-position: 0% 33.33%; animation: breakFrag4 1.2s ease forwards;}
+    .frag-5 { top: 33.33%; left: 25%; background-position: 25% 33.33%; animation: breakFrag5 1.2s ease forwards;}
+    .frag-6 { top: 33.33%; left: 50%; background-position: 50% 33.33%; animation: breakFrag6 1.2s ease forwards;}
+    .frag-7 { top: 33.33%; left: 75%; background-position: 75% 33.33%; animation: breakFrag7 1.2s ease forwards;}
+
+    /* Animaciones fragmentos con movimiento random + rotación + escala + opacidad */
+    @keyframes breakFrag0 {
+      to { transform: translate(-150vw, -100vh) rotate(-40deg) scale(0.2); opacity: 0; }
+    }
+    @keyframes breakFrag1 {
+      to { transform: translate(-80vw, -120vh) rotate(25deg) scale(0.15); opacity: 0; }
+    }
+    @keyframes breakFrag2 {
+      to { transform: translate(100vw, -90vh) rotate(35deg) scale(0.25); opacity: 0; }
+    }
+    @keyframes breakFrag3 {
+      to { transform: translate(150vw, -150vh) rotate(-30deg) scale(0.2); opacity: 0; }
+    }
+    @keyframes breakFrag4 {
+      to { transform: translate(-120vw, 120vh) rotate(50deg) scale(0.3); opacity: 0; }
+    }
+    @keyframes breakFrag5 {
+      to { transform: translate(-100vw, 150vh) rotate(-60deg) scale(0.2); opacity: 0; }
+    }
+    @keyframes breakFrag6 {
+      to { transform: translate(130vw, 140vh) rotate(45deg) scale(0.15); opacity: 0; }
+    }
+    @keyframes breakFrag7 {
+      to { transform: translate(170vw, 160vh) rotate(-50deg) scale(0.3); opacity: 0; }
     }
   </style>
 </head>
 <body>
   <div class="container">
     <img src="sobre_portada.jpg" alt="Portada de XV Valeria Rocha" class="portada" />
-    <a href="Informacion.html" class="invisible-button" aria-label="Ir a la invitación">Abreme</a>
+    <a href="Informacion.html" class="invisible-button" aria-label="Ir a la invitación" id="btnAbrir">Ábreme</a>
   </div>
+
+  <script>
+    const btn = document.getElementById('btnAbrir');
+
+    btn.addEventListener('click', function(event) {
+      event.preventDefault();
+
+      // Agregar animación shake al botón antes de romper
+      btn.classList.add('shake');
+
+      // Después de 0.8s empieza la ruptura
+      setTimeout(() => {
+        btn.classList.add('disappear');
+
+        // Crear contenedor para fragmentos
+        const pageBreak = document.createElement('div');
+        pageBreak.className = 'page-break';
+
+        // Crear 8 fragmentos
+        for (let i = 0; i < 8; i++) {
+          const frag = document.createElement('div');
+          frag.classList.add('fragment', `frag-${i}`);
+          // Usar la misma imagen como fondo, ajustada para cada fragmento
+          frag.style.backgroundImage = "url('sobre_portada.jpg')";
+          pageBreak.appendChild(frag);
+        }
+
+        document.body.appendChild(pageBreak);
+
+        // Animación dura 1.2s, después redirige
+        setTimeout(() => {
+          window.location.href = btn.href;
+        }, 1200);
+      }, 800);
+    });
+  </script>
 </body>
 </html>
