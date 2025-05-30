@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>XV Frida Rocha</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     :root {
       --rosa-claro: #fbe8f1;
@@ -12,32 +13,40 @@
       --violeta: #9c6dd1;
       --blanco: #fff;
       --sombra: rgba(0, 0, 0, 0.15);
+      --dorado: #d4af37;
+      --rosa-suave: #f8c8dc;
     }
 
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Montserrat', sans-serif;
       background: linear-gradient(135deg, var(--rosa-claro), #f5d7ff);
       color: #3a2f5a;
       scroll-behavior: smooth;
+      line-height: 1.6;
     }
 
     .half-screen {
       position: relative;
       width: 100vw;
-      height: 150vh;
+      min-height: 100vh;
       display: flex;
-      flex-direction: column; /* ← esta línea es clave */
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       overflow: hidden;
       opacity: 1;
       transform: translateY(0);
-      transition: opacity 1s ease-out, transform 1s ease-out;
+      transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    /* Ajuste específico solo para la primera pantalla */
+    .pantalla-inicial {
+      justify-content: flex-start;
+      padding-top: 700px;
+    }
 
     .section-hidden {
       opacity: 0;
@@ -56,98 +65,279 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.7;
-      filter: brightness(0.6);
+      opacity: 0.6;
+      filter: brightness(0.85) contrast(1.1) blur(1px);
       z-index: 1;
-      transition: filter 0.4s ease;
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .half-screen:hover img {
-      filter: brightness(0.8);
+      opacity: 0.7;
+      filter: brightness(0.9) contrast(1.15) blur(0);
+      transform: scale(1.02);
     }
 
     .divisiones {
       position: relative;
       z-index: 2;
-      padding: 40px;
+      padding: 3rem;
       max-width: 420px;
       width: 90%;
       border-radius: 30px;
       text-align: center;
-      background: rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(12px);
-      box-shadow: 0 8px 24px var(--sombra);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
       animation: fadeIn 1.5s ease both;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    /* Para bajarla visualmente */
+    .divisiones:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    }
+
     .pantalla-inicial .divisiones {
-      margin-top: 200px;
+      margin-top: 2rem;
+    }
+
+    .half-screen:not(.pantalla-inicial) .divisiones {
+      margin-top: 8rem;
+      margin-bottom: 8rem;
+    }
+
+    .pantalla-inicial .divisiones h1 {
+      margin: 0 0 1.5rem;
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.5em;
+      background: linear-gradient(45deg, var(--rosa-intenso), var(--dorado));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .pantalla-inicial .divisiones h1:last-child {
+      font-size: 2.8em;
+      margin-bottom: 1.5rem;
+    }
+
+    .pantalla-inicial .custom-audio-controls {
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      width: 100%;
+      max-width: 400px;
+      margin: 1rem auto;
+      padding: 1rem;
+    }
+
+    .pantalla-inicial .divisiones::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, 
+        rgba(255, 255, 255, 0.15) 0%, 
+        rgba(255, 255, 255, 0.08) 50%, 
+        rgba(255, 255, 255, 0.15) 100%);
+      border-radius: 30px;
+      z-index: -1;
     }
 
     .divisiones h1 {
-      margin: 0 0 20px;
+      margin: 0 0 1.5rem;
       font-family: 'Great Vibes', cursive;
-      font-size: 3.2em;
-      color: var(--rosa-intenso);
-      text-shadow: 1px 1px 10px rgba(255,255,255,0.6);
+      font-size: 3.5em;
+      background: linear-gradient(45deg, var(--rosa-intenso), var(--dorado));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     }
 
     .divisiones h1:last-child {
       font-size: 2.8em;
-      margin-bottom: 30px;
+      margin-bottom: 1.5rem;
     }
 
     #contador {
       font-size: 1.4em;
-      padding: 10px 20px;
+      padding: 1rem 1.5rem;
       border-radius: 25px;
-      background: linear-gradient(90deg, var(--violeta), var(--rosa-intenso));
+      background: linear-gradient(135deg, var(--violeta), var(--rosa-intenso));
       color: white;
       box-shadow: 0 4px 14px var(--sombra);
-      margin-bottom: 25px;
+      margin: 1.5rem 0;
       animation: pulse 3s infinite ease-in-out;
+      font-weight: 600;
+      letter-spacing: 0.5px;
     }
 
     .custom-audio-controls {
       display: flex;
       align-items: center;
-      gap: 15px;
-      background: rgba(255, 255, 255, 0.7);
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.95);
       border-radius: 20px;
-      padding: 10px 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
       width: 100%;
       max-width: 400px;
-      margin: 0 auto;
+      margin: 1rem auto;
+      transition: transform 0.3s ease;
+    }
+
+    .custom-audio-controls:hover {
+      transform: scale(1.02);
     }
 
     .custom-audio-controls button {
-      background: var(--violeta);
+      background: linear-gradient(45deg, var(--violeta), var(--rosa-intenso));
       color: white;
       border: none;
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      font-size: 18px;
+      width: 45px;
+      height: 45px;
+      font-size: 1.2rem;
       cursor: pointer;
-      box-shadow: 0 2px 6px var(--sombra);
-      transition: background 0.3s;
+      box-shadow: 0 4px 8px var(--sombra);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .custom-audio-controls button:hover {
-      background: var(--rosa-intenso);
+      transform: scale(1.1);
+      box-shadow: 0 6px 12px var(--sombra);
     }
 
     #progressBar {
       flex: 1;
       appearance: none;
-      height: 6px;
-      border-radius: 3px;
+      height: 8px;
+      border-radius: 4px;
       background: linear-gradient(to right, var(--rosa-intenso), var(--violeta));
       outline: none;
       cursor: pointer;
+      transition: height 0.2s ease;
+    }
+
+    #progressBar:hover {
+      height: 10px;
+    }
+
+    #progressBar::-webkit-slider-thumb {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      background: white;
+      border-radius: 50%;
+      border: 2px solid var(--rosa-intenso);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    #progressBar::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    .botones {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .botones a {
+      background: linear-gradient(45deg, var(--rosa-intenso), var(--violeta));
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .botones a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+      );
+      transition: 0.5s;
+    }
+
+    .botones a:hover::before {
+      left: 100%;
+    }
+
+    .botones a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    #autoPlayButton {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      padding: 1rem 2rem;
+      background: linear-gradient(45deg, var(--rosa-intenso), var(--violeta));
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      z-index: 9999;
+      box-shadow: 0 4px 15px var(--sombra);
+      transition: all 0.3s ease;
+      animation: float 3s infinite ease-in-out;
+    }
+
+    #autoPlayButton:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px var(--sombra);
+    }
+
+    .nombre {
+      color: var(--dorado) !important;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2) !important;
+      -webkit-text-fill-color: var(--dorado) !important;
+    }
+
+    .info-section {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 2rem;
+      border-radius: 20px;
+      margin: 2rem auto;
+      max-width: 600px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-section h2 {
+      color: var(--rosa-intenso);
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+
+    .info-section p {
+      margin: 1rem 0;
+      line-height: 1.8;
     }
 
     @keyframes fadeIn {
@@ -158,163 +348,618 @@
     @keyframes pulse {
       0%, 100% {
         transform: scale(1);
-        box-shadow: 0 0 12px rgba(210, 106, 138, 0.4);
+        box-shadow: 0 4px 12px rgba(210, 106, 138, 0.4);
       }
       50% {
         transform: scale(1.03);
-        box-shadow: 0 0 20px rgba(210, 106, 138, 0.7);
+        box-shadow: 0 8px 24px rgba(210, 106, 138, 0.6);
       }
     }
 
-    @media (max-width: 500px) {
-      .divisiones {
-        padding: 25px 20px;
-      }
-      .divisiones h1 {
-        font-size: 2.5em;
-      }
-      .divisiones h1:last-child {
-        font-size: 2.2em;
-      }
-      #contador {
-        font-size: 1.2em;
-      }
-    }
-
-    /* Botón de inicio */
-    #autoPlayButton {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      padding: 12px 24px;
-      background: var(--rosa-intenso);
-      color: white;
-      border: none;
-      border-radius: 25px;
-      font-size: 16px;
-      cursor: pointer;
-      z-index: 9999;
-      box-shadow: 0 4px 12px var(--sombra);
-    }
-
-    #autoPlayButton:hover {
-      background: var(--violeta);
-    }
-
-    .divisiones img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin: 0 auto 15px; /* para separar un poco */
-    }
-
-    /* Solo para las imágenes específicas: corona y pie */
-    .divisiones img[alt="diseño"] {
-      max-width: 700px;
-      height: auto;
-      display: block;
-      margin: 10px auto 10px; /* centrar y ajustar espacio arriba y abajo */
-      position: relative;
-      top: -10px; /* sube la imagen 10px */
-    }
-    /* Solo al segundo .divisiones dentro del segundo .half-screen */
-    
-    .half-screen:nth-of-type(2) .divisiones img[alt="diseño"] {
-      max-width: 300px; /* más grandes */
-      top: -10px;
-      margin-bottom: 20px;
-    }
-    .half-screen:nth-of-type(2) .divisiones {
-      max-width: 700px; /* o el ancho que quieras */
-      margin-top: 120px;
-      border-radius: 30px;
-
-    }
-    .divisiones .nombre {
-      color: white;
-      text-shadow: black;
-    }
-    .half-screen:nth-of-type(2) {
-      height: 170vh;
-    }
-    .half-screen:nth-of-type(3) .divisiones {
-      margin-top: 120px; /* baja ese div específico */
-      background-color: rosegold;
-      /* mantener border-radius y demás para que se vea bien */
-      border-radius: 30px;
-      /* Opcional: ajustar color texto si el fondo lo requiere */
-      color: #b76e79; /* o blanco si prefieres más contraste */
-    }
-    html {
-      scroll-behavior: smooth;
-    }
-    .divisiones > * {
-      transition: all 0.5s ease;
-    }
-    .nombre {
-      color: white;
-      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
-    }
-    #autoPlayButton {
-      animation: pulse 2s infinite ease-in-out;
-    }
-    .half-screen::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.4));
-      z-index: 1;
-    }
-    .custom-audio-controls button {
-      padding: 10px;
-    }
-    #contador {
-      animation: glow 4s ease-in-out infinite;
-    }
-    @keyframes glow {
+    @keyframes float {
       0%, 100% {
-        text-shadow: 0 0 10px var(--rosa-intenso);
+        transform: translateY(0);
       }
       50% {
-        text-shadow: 0 0 20px var(--violeta);
+        transform: translateY(-10px);
       }
     }
-    .botones {
-      margin-top: 1rem;
+
+    @media (max-width: 768px) {
+      .pantalla-inicial {
+        padding-top: 300px;
+      }
+
+      .divisiones {
+        padding: 2rem;
+        margin: 1rem;
+      }
+
+      .divisiones h1 {
+        font-size: 2.8em;
+      }
+
+      .divisiones h1:last-child {
+        font-size: 2.4em;
+      }
+
+      #contador {
+        font-size: 1.2em;
+        padding: 0.8rem 1.2rem;
+      }
+
+      .botones {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0 1rem;
+      }
+
+      .botones a {
+        text-align: center;
+      }
+
+      .custom-audio-controls {
+        padding: 0.8rem;
+      }
+
+      .custom-audio-controls button {
+        width: 40px;
+        height: 40px;
+      }
+
+      .pantalla-inicial .divisiones {
+        max-width: 90%;
+        padding: 2rem;
+      }
+      
+      .pantalla-inicial .divisiones h1 {
+        font-size: 2.8em;
+      }
+
+      .pantalla-inicial .divisiones h1:last-child {
+        font-size: 2.4em;
+      }
+
+      .pantalla-inicial #contador {
+        width: 90%;
+        font-size: 1.3em;
+      }
+
+      .half-screen:not(.pantalla-inicial) .divisiones {
+        margin-top: 4rem;
+        margin-bottom: 4rem;
+      }
+    }
+
+    /* Nuevos estilos para la galería */
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .galeria-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      aspect-ratio: 1;
+    }
+
+    .galeria-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .galeria-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .galeria-item:hover img {
+      transform: scale(1.1);
+    }
+
+    /* Estilos para la sección de regalos */
+    .mesa-regalos {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 2rem;
+      border-radius: 20px;
+      margin: 2rem auto;
+      max-width: 800px;
+      text-align: center;
+    }
+
+    .regalo-item {
+      display: inline-flex;
+      align-items: center;
+      margin: 1rem;
+      padding: 1rem 2rem;
+      background: linear-gradient(45deg, var(--rosa-suave), var(--rosa-claro));
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .regalo-item:hover {
+      transform: translateY(-3px);
+    }
+
+    .regalo-item i {
+      font-size: 1.5rem;
+      margin-right: 1rem;
+      color: var(--rosa-intenso);
+    }
+
+    /* Estilos para el mapa */
+    .mapa-container {
+      width: 100%;
+      max-width: 800px;
+      height: 400px;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 2rem auto;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Estilos para el código de vestimenta */
+    .dress-code {
       display: flex;
-      gap: 1rem;
       justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+
+    .dress-code-item {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      flex: 1;
+      min-width: 250px;
+      max-width: 350px;
+      transition: all 0.3s ease;
+    }
+
+    .dress-code-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .dress-code-item i {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(45deg, var(--rosa-intenso), var(--violeta));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .dress-code-item h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--rosa-intenso);
+    }
+
+    .dress-code-item p {
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .dress-code-colors {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .color-circle {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    /* Estilos para el aviso de colores reservados */
+    .restricted-notice {
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, var(--rosa-intenso), var(--dorado));
+      border-radius: 20px;
+      color: white;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+      max-width: 90%;
+      animation: glow 3s infinite ease-in-out;
+    }
+
+    .restricted-notice::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+      );
+      animation: shine 3s infinite;
+    }
+
+    .restricted-notice h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      font-family: 'Great Vibes', cursive;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .restricted-colors {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .color-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .color-circle:hover {
+      transform: scale(1.2);
+    }
+
+    @keyframes shine {
+      0% {
+        left: -100%;
+      }
+      20% {
+        left: 100%;
+      }
+      100% {
+        left: 100%;
+      }
+    }
+
+    @keyframes glow {
+      0%, 100% {
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+      50% {
+        box-shadow: 0 8px 30px rgba(210, 106, 138, 0.4);
+      }
+    }
+
+    /* Estilos para el timeline */
+    .timeline {
+      max-width: 800px;
+      margin: 2rem auto;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(var(--rosa-intenso), var(--violeta));
+    }
+
+    .timeline-item {
+      margin: 2rem 0;
+      position: relative;
+      width: 50%;
+      padding: 0 2rem;
+    }
+
+    .timeline-item:nth-child(odd) {
+      left: 0;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: 50%;
+    }
+
+    .timeline-content {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 1.5rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .timeline-content::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: var(--rosa-intenso);
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content::before {
+      right: -10px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content::before {
+      left: -10px;
+    }
+
+    /* Estilos para el botón de música flotante */
+    .floating-music {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: linear-gradient(45deg, var(--rosa-intenso), var(--violeta));
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .floating-music:hover {
+      transform: scale(1.1);
+    }
+
+    .floating-music i {
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    /* Estilos para el contador más elegante */
+    .countdown-container {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .countdown-item {
+      background: linear-gradient(45deg, var(--rosa-intenso), var(--violeta));
+      padding: 1rem;
+      border-radius: 15px;
+      min-width: 100px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .countdown-number {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .countdown-label {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 768px) {
+      .timeline::before {
+        left: 0;
+      }
+
+      .timeline-item {
+        width: 100%;
+        left: 0 !important;
+        padding-left: 2rem;
+      }
+
+      .timeline-item:nth-child(even) .timeline-content::before {
+        left: -10px;
+      }
+
+      .dress-code {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .dress-code-item {
+        width: 100%;
+        max-width: none;
+      }
+    }
+
+    .divisiones img[alt="diseño"] {
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+      transition: all 0.3s ease;
+    }
+
+    .divisiones img[alt="diseño"]:hover {
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.3));
+      transform: translateY(-5px);
+    }
+
+    /* Estilos para los botones de ubicación */
+    .location-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .location-button {
+      position: relative;
+      padding: 1.2rem 2.5rem;
+      background: linear-gradient(135deg, var(--rosa-intenso), var(--violeta));
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      overflow: hidden;
+    }
+
+    .location-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+      );
+      transition: 0.5s;
+    }
+
+    .location-button:hover::before {
+      left: 100%;
+    }
+
+    .location-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .location-button i {
+      font-size: 1.3rem;
+      transition: transform 0.3s ease;
+    }
+
+    .location-button:hover i {
+      transform: scale(1.2);
+    }
+
+    .location-button.maps {
+      background: linear-gradient(135deg, #4285f4, #34a853);
+    }
+
+    .location-button.whatsapp {
+      background: linear-gradient(135deg, #25d366, #128c7e);
+    }
+
+    .location-button.forms {
+      background: linear-gradient(135deg, #673AB7, #9C27B0);
+    }
+
+    .location-button.forms:hover {
+      background: linear-gradient(135deg, #7E57C2, #AB47BC);
+    }
+
+    @media (max-width: 768px) {
+      .location-buttons {
+        flex-direction: column;
+        padding: 0 1rem;
+      }
+
+      .location-button {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+      }
+    }
+
+    /* Estilos actualizados para el contador en su nueva ubicación */
+    .countdown-elegant {
+      margin: 1.5rem 0;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, var(--rosa-intenso), var(--violeta));
+      border-radius: 20px;
+      color: white;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      animation: glow 3s infinite ease-in-out;
+    }
+
+    .countdown-container {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
       flex-wrap: wrap;
     }
 
-    .botones a {
-      background-color: var(--rosa-intenso);
-      color: white;
-      padding: 12px 20px;
-      border-radius: 30px;
-      text-decoration: none;
+    .countdown-item {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-radius: 15px;
+      min-width: 80px;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .countdown-number {
+      font-size: 1.8rem;
       font-weight: bold;
-      transition: background-color 0.3s ease;
+      margin-bottom: 0.3rem;
     }
 
-    .botones a:hover {
-      background-color: var(--violeta);
+    .countdown-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.9;
     }
 
+    /* Estilo específico para el segundo div (agradecimiento) */
+    .pantalla-rosgold .divisiones {
+      max-width: 800px;
+      width: 95%;
+      padding: 4rem;
+    }
+
+    .pantalla-rosgold .divisiones h1 {
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @media (max-width: 768px) {
+      .pantalla-rosgold .divisiones {
+        padding: 2rem;
+        width: 90%;
+      }
+    }
   </style>
 </head>
 <body>
+  <button id="autoPlayButton">✨ Iniciar experiencia ✨</button>
 
-  <!-- Botón de inicio -->
-  <button id="autoPlayButton">Iniciar experiencia</button>
-
-  <!-- Pantalla 1 -->
   <div class="half-screen pantalla-inicial">
     <img src="Sesion_ft_1.jpg" alt="Sesión Foto" />
     <div class="divisiones">
       <h1>Mis XV años</h1>
       <h1>Frida Rocha</h1>
-      <div id="contador">Calculando...</div>
       <audio id="miAudio" src="lana del rey - salvatore (philipz flip).mp3"></audio>
       <div class="custom-audio-controls">
         <button id="playPauseBtn" title="Reproducir/Pausar">▶️</button>
@@ -324,36 +969,142 @@
     </div>
   </div>
 
-  <!-- Pantalla 2 -->
   <div class="half-screen pantalla-rosgold">
     <img src="fondo_rosas-pica.png" alt="Fondo Rosas" />
     <div class="divisiones">
-      <img src="corona.png" alt="diseño">
-      <h1>En este día tan especial, desde lo más profundo de mi alma quiero agradecer a mis padres por su amor incondicional, apoyo en cada paso de mi vida y cada esfuerzo y sacrificio que han hecho para que este momento sea tan hermoso e inolvidable </h1>
+      <img src="corona.png" alt="diseño" style="position: relative; width: 150px; margin-bottom: 2rem;">
+      <h1 style="font-size: 2.2em; line-height: 1.4;">En este día tan especial, desde lo más profundo de mi alma quiero agradecer a mis padres por su amor incondicional, apoyo en cada paso de mi vida y cada esfuerzo y sacrificio que han hecho para que este momento sea tan hermoso e inolvidable</h1>
       <h1>con todo el corazón</h1>
-      <img src="pie.png" alt="diseño">
+      <img src="pie.png" alt="diseño" style="position: relative; width: 120px; margin: 2rem 0;">
       <h1 class="nombre">Carmen Janeth Torres Luna</h1>
       <h1 class="nombre">Juan Miguel Rocha Velazco</h1>
     </div>
   </div>
 
-  <div class="divisiones">
-    <h1>📍 Misa de Acción de Gracias</h1>
-    <p><strong>Fecha:</strong> 20 de Julio de 2025, 17:00 hrs</p>
-    <p><strong>Ubicación:</strong> Parroquia de San José, Calle Principal 123, Ciudad de México</p>
+  <div class="half-screen">
+    <div class="divisiones" style="max-width: 600px;">
+      <h1 style="font-size: 3em;">Celebración</h1>
+      
+      <div class="info-section">
+        <h2>📍 Misa de Acción de Gracias</h2>
+        <div id="contador" class="countdown-elegant">Calculando...</div>
+        <p><strong>Fecha:</strong> 20 de Julio de 2025</p>
+        <p><strong>Hora:</strong> 17:00 hrs</p>
+        <p><strong>Lugar:</strong> Parroquia de San José</p>
+        <p><strong>Dirección:</strong> Calle Principal 123, Ciudad de México</p>
 
-    <div id="contador"></div> <!-- Reutilizamos tu contador -->
-
-    <div class="botones">
-      <a href="https://www.google.com/maps/place/Parroquia+de+San+José,+Ciudad+de+México" target="_blank">
-        Ver en Google Maps
-      </a>
-      <a href="https://wa.me/5215555555555?text=¡Confirmo%20mi%20asistencia%20a%20los%20XV%20de%20Frida!" target="_blank">
-        Confirmar Asistencia
-      </a>
+        <div class="location-buttons">
+          <a href="https://www.google.com/maps/place/Parroquia+de+San+José,+Ciudad+de+México" target="_blank" class="location-button maps">
+            <i class="fas fa-map-marker-alt"></i>
+            Ver ubicación
+          </a>
+          <a href="https://forms.gle/tuFormularioAqui" target="_blank" class="location-button forms">
+            <i class="fas fa-clipboard-check"></i>
+            Confirmar Asistencia
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 
+  <!-- Nueva sección de Timeline -->
+  <div class="half-screen">
+    <div class="divisiones" style="max-width: 800px;">
+      <h1 style="font-size: 3em;">Programa del Día</h1>
+      
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h3>17:00</h3>
+            <p>Misa de Acción de Gracias</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h3>18:30</h3>
+            <p>Recepción de Invitados</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h3>19:00</h3>
+            <p>Cena</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h3>20:00</h3>
+            <p>Vals y Baile</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nueva sección de Código de Vestimenta -->
+  <div class="half-screen">
+    <div class="divisiones" style="max-width: 800px;">
+      <h1 style="font-size: 3em;">Código de Vestimenta</h1>
+      
+      <div class="restricted-notice">
+        <h3>✨ Colores Reservados ✨</h3>
+        <p style="font-size: 1.2rem; margin: 1rem 0;">Para la Quinceañera</p>
+        <div class="restricted-colors">
+          <div class="color-circle" style="background: var(--rosa-intenso);" title="Rosa"></div>
+          <div class="color-circle" style="background: var(--dorado);" title="Dorado"></div>
+        </div>
+      </div>
+      
+      <div class="dress-code">
+        <div class="dress-code-item">
+          <i class="fas fa-female"></i>
+          <h3>Damas</h3>
+          <p>Vestido largo o cocktail</p>
+          <p>Colores sugeridos:</p>
+          <div class="dress-code-colors">
+            <div class="color-circle" style="background: #4B0082;"></div>
+            <div class="color-circle" style="background: #800080;"></div>
+            <div class="color-circle" style="background: #483D8B;"></div>
+            <div class="color-circle" style="background: #2F4F4F;"></div>
+          </div>
+        </div>
+        <div class="dress-code-item">
+          <i class="fas fa-male"></i>
+          <h3>Caballeros</h3>
+          <p>Traje formal oscuro</p>
+          <p>Corbata o moño</p>
+          <div class="dress-code-colors">
+            <div class="color-circle" style="background: #000000;"></div>
+            <div class="color-circle" style="background: #1a1a1a;"></div>
+            <div class="color-circle" style="background: #0F1626;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nueva sección de Mesa de Regalos -->
+  <div class="half-screen">
+    <div class="divisiones" style="max-width: 800px;">
+      <h1 style="font-size: 3em;">Mesa de Regalos</h1>
+      
+      <div class="mesa-regalos">
+        <div class="regalo-item">
+          <i class="fas fa-gift"></i>
+          <span>Liverpool - Mesa de Regalos #12345</span>
+        </div>
+        <div class="regalo-item">
+          <i class="fas fa-money-bill-wave"></i>
+          <span>Sobre para lluvia de sobres</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón flotante de música -->
+  <div class="floating-music" id="floatingMusicBtn">
+    <i class="fas fa-music"></i>
+  </div>
 
   <script>
     function calcularTiempo() {
@@ -448,6 +1199,71 @@
     audio.addEventListener("error", () => {
       alert("No se pudo cargar la canción. Asegúrate de que el archivo MP3 esté en la carpeta del proyecto.");
     });
+
+    // Nuevo script para el botón flotante de música
+    const floatingMusicBtn = document.getElementById('floatingMusicBtn');
+    floatingMusicBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        floatingMusicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+      } else {
+        audio.pause();
+        floatingMusicBtn.innerHTML = '<i class="fas fa-music"></i>';
+      }
+    });
+
+    // Actualizar el botón flotante cuando cambie el estado del audio
+    audio.addEventListener('play', () => {
+      floatingMusicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+    });
+
+    audio.addEventListener('pause', () => {
+      floatingMusicBtn.innerHTML = '<i class="fas fa-music"></i>';
+    });
+
+    // Mejorar el contador con elementos separados
+    function actualizarContadorElegante(dias, horas, minutos) {
+      const contador = document.getElementById('contador');
+      contador.innerHTML = `
+        <div class="countdown-container">
+          <div class="countdown-item">
+            <div class="countdown-number">${dias}</div>
+            <div class="countdown-label">días</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-number">${horas}</div>
+            <div class="countdown-label">horas</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-number">${minutos}</div>
+            <div class="countdown-label">minutos</div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Modificar la función calcularTiempo para usar el nuevo contador
+    function calcularTiempo() {
+      const ahora = new Date();
+      const añoActual = ahora.getFullYear();
+      let fechaEvento = new Date(`${añoActual}-08-13T17:00:00`);
+      if (ahora > fechaEvento) {
+        fechaEvento = new Date(`${añoActual + 1}-08-13T17:00:00`);
+      }
+
+      const msRestantes = fechaEvento - ahora;
+      if (msRestantes <= 0) {
+        document.getElementById("contador").innerText = "¡El evento ha llegado!";
+        return;
+      }
+
+      const segundosTotales = Math.floor(msRestantes / 1000);
+      const dias = Math.floor(segundosTotales / (60 * 60 * 24));
+      const horas = Math.floor((segundosTotales % (60 * 60 * 24)) / (60 * 60));
+      const minutos = Math.floor((segundosTotales % (60 * 60)) / 60);
+
+      actualizarContadorElegante(dias, horas, minutos);
+    }
   </script>
 </body>
 </html>
