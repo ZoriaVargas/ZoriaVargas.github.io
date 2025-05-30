@@ -279,20 +279,27 @@
         text-shadow: 0 0 20px var(--violeta);
       }
     }
+    .botones {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
 
+    .botones a {
+      background-color: var(--rosa-intenso);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
+    .botones a:hover {
+      background-color: var(--violeta);
+    }
 
   </style>
 </head>
@@ -330,15 +337,23 @@
     </div>
   </div>
 
-  <div class="half-screen pantalla-rosgold-2">
-    <div class="divisiones">
-      <img src="corona.png" alt="diseño">
-      <h1>En este día tan especial, desde lo más profundo de mi alma quiero agradecer a mis padres por su amor incondicional, apoyo en cada paso de mi vida y cada esfuerzo y sacrificio que han hecho para que este momento sea tan hermoso e inolvidable </h1>
-      <h1>con todo el corazón</h1>
-      <img src="pie.png" alt="diseño">
-      <h1 class="nombre">Carmen Janeth Torres Luna</h1>
-      <h1 class="nombre">Juan Miguel Rocha Velazco</h1>
+  <div class="divisiones">
+    <h1>📍 Misa de Acción de Gracias</h1>
+    <p><strong>Fecha:</strong> 20 de Julio de 2025, 17:00 hrs</p>
+    <p><strong>Ubicación:</strong> Parroquia de San José, Calle Principal 123, Ciudad de México</p>
+
+    <div id="contador"></div> <!-- Reutilizamos tu contador -->
+
+    <div class="botones">
+      <a href="https://www.google.com/maps/place/Parroquia+de+San+José,+Ciudad+de+México" target="_blank">
+        Ver en Google Maps
+      </a>
+      <a href="https://wa.me/5215555555555?text=¡Confirmo%20mi%20asistencia%20a%20los%20XV%20de%20Frida!" target="_blank">
+        Confirmar Asistencia
+      </a>
     </div>
+  </div>
+
 
   <script>
     function calcularTiempo() {
