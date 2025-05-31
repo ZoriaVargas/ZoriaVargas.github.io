@@ -2576,6 +2576,288 @@
         margin: 0.8rem 0;
       }
     }
+
+    /* Ajustes mejorados para móvil */
+    @media (max-width: 768px) {
+      .half-screen {
+        min-height: auto;
+        padding: 2rem 0;
+      }
+
+      .divisiones {
+        width: 88%;
+        max-width: 320px;
+        padding: 1.2rem;
+        margin: 0.8rem auto;
+      }
+
+      .divisiones h1 {
+        font-size: 2em !important;
+        margin-bottom: 0.8rem;
+        line-height: 1.3;
+      }
+
+      .pantalla-inicial {
+        padding-top: 320px;
+      }
+
+      .info-section {
+        width: 88%;
+        max-width: 320px;
+        padding: 1.2rem;
+        margin: 0.8rem auto;
+      }
+
+      .info-section h2 {
+        font-size: 1.6em;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+        margin: 0.6rem 0;
+      }
+
+      /* Contador más compacto */
+      .contador {
+        padding: 0.8rem;
+        margin: 1.2rem auto;
+        width: 90%;
+        max-width: 280px;
+      }
+
+      .contador-item {
+        padding: 0.6rem;
+        min-width: 60px;
+      }
+
+      .numero {
+        font-size: 1.6em;
+      }
+
+      .texto {
+        font-size: 0.65em;
+      }
+
+      /* Botones y controles más compactos */
+      .location-buttons {
+        width: 88%;
+        max-width: 280px;
+        gap: 0.6rem;
+        margin: 1rem auto;
+      }
+
+      .location-button {
+        width: 100%;
+        max-width: 260px;
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
+        margin: 0.2rem auto;
+      }
+
+      .custom-audio-controls {
+        width: 88%;
+        max-width: 280px;
+        padding: 0.8rem;
+        gap: 0.6rem;
+        margin: 0.8rem auto;
+      }
+
+      .custom-audio-controls button {
+        width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+      }
+
+      #progressBar {
+        height: 5px;
+        max-width: 150px;
+      }
+
+      /* Mesa de regalos más compacta */
+      .mesa-regalos {
+        width: 88%;
+        max-width: 320px;
+        padding: 1.2rem;
+        margin: 0.8rem auto;
+      }
+
+      .cuenta-info {
+        width: 90%;
+        max-width: 280px;
+        padding: 1rem;
+        margin: 0.6rem auto;
+        font-size: 0.85em;
+      }
+
+      .envelope {
+        width: 70px;
+        height: 42px;
+        margin: 1.5rem auto;
+      }
+
+      /* Código de vestimenta más compacto */
+      .dress-code {
+        gap: 0.8rem;
+        padding: 0 0.8rem;
+        max-width: 320px;
+        margin: 0 auto;
+      }
+
+      .dress-code-item {
+        padding: 1rem;
+        margin: 0.4rem 0;
+      }
+
+      .dress-code-item h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.6rem;
+      }
+
+      .color-circle {
+        width: 22px;
+        height: 22px;
+      }
+
+      /* Botones flotantes más pequeños */
+      #autoPlayButton {
+        font-size: 0.85rem;
+        padding: 0.6rem 1rem;
+        top: 8px;
+        max-width: 180px;
+      }
+
+      .floating-music {
+        width: 40px;
+        height: 40px;
+        bottom: 12px;
+        right: 12px;
+      }
+
+      .floating-music i {
+        font-size: 1.1rem;
+      }
+    }
+
+    /* Ajustes para pantallas muy pequeñas */
+    @media (max-width: 360px) {
+      .divisiones {
+        width: 92%;
+        max-width: 300px;
+        padding: 1rem;
+      }
+
+      .divisiones h1 {
+        font-size: 1.7em !important;
+      }
+
+      .info-section {
+        width: 92%;
+        max-width: 300px;
+        padding: 1rem;
+      }
+
+      .info-section h2 {
+        font-size: 1.4em;
+      }
+
+      .contador {
+        width: 92%;
+        max-width: 260px;
+      }
+
+      .contador-item {
+        padding: 0.5rem;
+        min-width: 50px;
+      }
+
+      .numero {
+        font-size: 1.4em;
+      }
+
+      .location-button {
+        max-width: 220px;
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+      }
+
+      .custom-audio-controls {
+        width: 92%;
+        max-width: 260px;
+        padding: 0.7rem;
+      }
+
+      .mesa-regalos {
+        width: 92%;
+        max-width: 300px;
+        padding: 1rem;
+      }
+
+      .cuenta-info {
+        width: 92%;
+        max-width: 260px;
+        font-size: 0.8em;
+        padding: 0.8rem;
+      }
+
+      .envelope {
+        width: 60px;
+        height: 36px;
+      }
+    }
+
+    /* Centrado mejorado para todos los elementos */
+    @media (max-width: 768px) {
+      .half-screen {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .divisiones, 
+      .info-section, 
+      .mesa-regalos,
+      .cuenta-info,
+      .custom-audio-controls,
+      .location-buttons,
+      .dress-code {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto;
+      }
+
+      .pantalla-inicial {
+        justify-content: flex-start;
+        padding-top: 280px;
+      }
+
+      /* Ajuste de espaciado vertical */
+      .section-spacing > * + * {
+        margin-top: 1rem;
+      }
+
+      /* Optimización de rendimiento */
+      * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .fade-in, 
+      .slide-up, 
+      .slide-in-left, 
+      .slide-in-right {
+        animation-duration: 0.4s;
+      }
+    }
   </style>
 </head>
 <body>
