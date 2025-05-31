@@ -2858,6 +2858,325 @@
         animation-duration: 0.4s;
       }
     }
+
+    /* Restauración y ajustes de los controles de audio */
+    .custom-audio-controls {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 200, 220, 0.15));
+      border-radius: 25px;
+      padding: 1.4rem;
+      box-shadow: 0 4px 15px rgba(183, 110, 121, 0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(183, 110, 121, 0.2);
+      margin: 1.5rem auto;
+      max-width: 400px;
+    }
+
+    .custom-audio-controls button {
+      background: linear-gradient(45deg, var(--rosegold-dark), var(--dorado));
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(183, 110, 121, 0.2);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .custom-audio-controls button:hover {
+      transform: scale(1.1);
+      background: linear-gradient(45deg, var(--dorado), var(--rosegold-dark));
+      box-shadow: 0 6px 20px rgba(183, 110, 121, 0.3);
+    }
+
+    /* Ajustes de los botones de ubicación y asistencia */
+    .location-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.5rem auto;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .location-button {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      background: linear-gradient(135deg, var(--rosegold-dark), var(--dorado));
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      border: 1px solid rgba(183, 110, 121, 0.3);
+      box-shadow: 0 4px 15px rgba(183, 110, 121, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .location-button:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(135deg, var(--dorado), var(--rosegold-dark));
+      box-shadow: 0 6px 20px rgba(183, 110, 121, 0.3);
+    }
+
+    /* Ajustes del código de vestimenta */
+    .dress-code {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin: 2rem auto;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .dress-code-item {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 200, 220, 0.15));
+      padding: 1.5rem;
+      border-radius: 20px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(183, 110, 121, 0.2);
+      box-shadow: 0 8px 32px rgba(183, 110, 121, 0.15);
+    }
+
+    .dress-code-item h3 {
+      font-size: 1.4rem;
+      color: var(--rosegold-dark);
+      margin-bottom: 1rem;
+    }
+
+    .dress-code-item i {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, var(--rosegold-dark), var(--dorado));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Ajustes responsive */
+    @media (max-width: 768px) {
+      .custom-audio-controls {
+        width: 90%;
+        padding: 1.2rem;
+        gap: 1rem;
+      }
+
+      .custom-audio-controls button {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+      }
+
+      .location-buttons {
+        max-width: 280px;
+      }
+
+      .location-button {
+        padding: 0.9rem 1.3rem;
+        font-size: 0.95rem;
+      }
+
+      .dress-code {
+        max-width: 280px;
+        gap: 1.2rem;
+      }
+
+      .dress-code-item {
+        padding: 1.2rem;
+      }
+
+      .dress-code-item h3 {
+        font-size: 1.3rem;
+      }
+
+      .dress-code-item i {
+        font-size: 1.8rem;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .custom-audio-controls {
+        width: 95%;
+        padding: 1rem;
+        gap: 0.8rem;
+      }
+
+      .custom-audio-controls button {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+      }
+
+      .location-buttons {
+        max-width: 260px;
+      }
+
+      .location-button {
+        padding: 0.8rem 1.2rem;
+        font-size: 0.9rem;
+      }
+
+      .dress-code {
+        max-width: 260px;
+        gap: 1rem;
+      }
+
+      .dress-code-item {
+        padding: 1rem;
+      }
+
+      .dress-code-item h3 {
+        font-size: 1.2rem;
+      }
+
+      .dress-code-item i {
+        font-size: 1.6rem;
+      }
+    }
+
+    /* Estilos para el Buzón de los Deseos */
+    .wishes-button-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+
+    .wishes-button {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      text-decoration: none;
+      padding: 1.2rem 2.5rem;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .wishes-button i {
+      font-size: 1.4rem;
+    }
+
+    .wishes-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+      background: linear-gradient(135deg, #128C7E, #25D366);
+    }
+
+    /* Ajustes responsive para todas las secciones */
+    @media (max-width: 768px) {
+      .half-screen {
+        padding: 2rem 0;
+      }
+
+      .divisiones {
+        width: 90%;
+        max-width: 320px;
+        padding: 1.5rem;
+        margin: 1rem auto;
+      }
+
+      .divisiones h1 {
+        font-size: 2.2em !important;
+        margin-bottom: 1rem;
+      }
+
+      .info-section {
+        width: 90%;
+        max-width: 320px;
+        padding: 1.5rem;
+      }
+
+      .info-section p {
+        font-size: 1rem !important;
+        line-height: 1.5;
+        margin-bottom: 1.5rem !important;
+      }
+
+      .wishes-button {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+      }
+
+      .wishes-button i {
+        font-size: 1.2rem;
+      }
+
+      .location-buttons,
+      .custom-audio-controls,
+      .dress-code {
+        width: 90%;
+        max-width: 320px;
+      }
+
+      .mesa-regalos {
+        width: 90%;
+        max-width: 320px;
+        padding: 1.5rem;
+      }
+
+      .cuenta-info {
+        width: 100%;
+        padding: 1.2rem;
+        font-size: 0.9em;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .divisiones,
+      .info-section,
+      .mesa-regalos,
+      .location-buttons,
+      .custom-audio-controls,
+      .dress-code {
+        width: 92%;
+        max-width: 300px;
+        padding: 1.2rem;
+      }
+
+      .divisiones h1 {
+        font-size: 1.8em !important;
+      }
+
+      .info-section p {
+        font-size: 0.95rem !important;
+      }
+
+      .wishes-button {
+        padding: 0.9rem 1.8rem;
+        font-size: 0.95rem;
+      }
+
+      .wishes-button i {
+        font-size: 1.1rem;
+      }
+
+      .cuenta-info {
+        width: 100%;
+        padding: 1rem;
+        font-size: 0.85em;
+      }
+    }
   </style>
 </head>
 <body>
@@ -2869,11 +3188,11 @@
       <h1>Mis XV años</h1>
       <h1>Frida Rocha</h1>
       <div class="audio-wrapper">
-      <audio id="miAudio" src="lana del rey - salvatore (philipz flip).mp3"></audio>
-      <div class="custom-audio-controls">
-        <button id="playPauseBtn" title="Reproducir/Pausar">▶️</button>
-        <input type="range" id="progressBar" value="0" min="0" max="100" />
-        <button id="resetBtn" title="Reiniciar canción">🔁</button>
+        <audio id="miAudio" src="lana del rey - salvatore (philipz flip).mp3"></audio>
+        <div class="custom-audio-controls">
+          <button id="playPauseBtn" onclick="togglePlay()" title="Reproducir/Pausar">▶️</button>
+          <input type="range" id="progressBar" value="0" min="0" max="100" />
+          <button id="resetBtn" onclick="resetAudio()" title="Reiniciar canción">🔁</button>
         </div>
       </div>
     </div>
@@ -3027,99 +3346,62 @@
     </div>
   </div>
 
+  <!-- Nueva sección de Buzón de los Deseos -->
+  <div class="half-screen deseos">
+    <img src="Sesion_ft_1.jpg" alt="Fondo Deseos" />
+    <div class="divisiones" style="max-width: 500px;">
+      <h1 style="font-size: 3em;">Buzón de los Deseos</h1>
+      
+      <div class="info-section">
+        <p style="font-size: 1.2em; margin-bottom: 2rem; line-height: 1.6;">
+          Me encantaría recibir tus buenos deseos y mensajes en este día tan especial. Comparte conmigo tus palabras a través de WhatsApp.
+        </p>
+
+        <div class="wishes-button-container">
+          <a href="https://wa.me/1234567890?text=¡Hola Frida! Quiero compartir contigo mis deseos para tus XV años..." 
+             target="_blank" 
+             class="wishes-button">
+            <i class="fab fa-whatsapp"></i>
+            Enviar mensaje
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Botón flotante de música -->
   <div class="floating-music" id="floatingMusicBtn">
     <i class="fas fa-music"></i>
   </div>
 
   <script>
-    // Función para actualizar el contador
-    function actualizarContadorElegante(dias, horas, minutos) {
-      const contador = document.getElementById('contador');
-      contador.innerHTML = `
-        <div class="countdown-container">
-          <div class="countdown-item">
-            <div class="countdown-number">${String(dias).padStart(2, '0')}</div>
-            <div class="countdown-label">días</div>
-          </div>
-          <div class="countdown-item">
-            <div class="countdown-number">${String(horas).padStart(2, '0')}</div>
-            <div class="countdown-label">horas</div>
-          </div>
-          <div class="countdown-item">
-            <div class="countdown-number">${String(minutos).padStart(2, '0')}</div>
-            <div class="countdown-label">minutos</div>
-          </div>
-        </div>
-      `;
-    }
-
-    function calcularTiempo() {
-      const ahora = new Date();
-      const fechaEvento = new Date('2025-08-31T17:00:00');
-      
-      const msRestantes = fechaEvento - ahora;
-      if (msRestantes <= 0) {
-        document.getElementById("contador").innerHTML = `
-          <div class="countdown-container">
-            <div class="countdown-item special">
-              <div class="countdown-number">¡Hoy</div>
-              <div class="countdown-label">es el día!</div>
-            </div>
-          </div>
-        `;
-        return;
-      }
-
-      const segundosTotales = Math.floor(msRestantes / 1000);
-      const dias = Math.floor(segundosTotales / (60 * 60 * 24));
-      const horas = Math.floor((segundosTotales % (60 * 60 * 24)) / (60 * 60));
-      const minutos = Math.floor((segundosTotales % (60 * 60)) / 60);
-
-      actualizarContadorElegante(dias, horas, minutos);
-    }
-
-    // Iniciar el contador y actualizarlo cada minuto
-    calcularTiempo();
-    setInterval(calcularTiempo, 60000);
-
-    const secciones = document.querySelectorAll(".half-screen");
-    const observer = new IntersectionObserver((entradas) => {
-      entradas.forEach((entrada) => {
-        if (entrada.isIntersecting) {
-          entrada.target.classList.add("section-visible");
-          entrada.target.classList.remove("section-hidden");
-        }
-      });
-    }, { threshold: 0.3 });
-
-    secciones.forEach((seccion) => {
-      seccion.classList.add("section-hidden");
-      observer.observe(seccion);
-    });
-
     const audio = document.getElementById("miAudio");
     const playPauseBtn = document.getElementById("playPauseBtn");
     const progressBar = document.getElementById("progressBar");
     const resetBtn = document.getElementById("resetBtn");
+    const autoPlayButton = document.getElementById("autoPlayButton");
+    const floatingMusicBtn = document.getElementById("floatingMusicBtn");
 
-    playPauseBtn.addEventListener("click", () => {
+    function togglePlay() {
       if (audio.paused) {
         audio.play();
         playPauseBtn.textContent = "⏸️";
+        floatingMusicBtn.innerHTML = '<i class="fas fa-pause"></i>';
       } else {
         audio.pause();
         playPauseBtn.textContent = "▶️";
+        floatingMusicBtn.innerHTML = '<i class="fas fa-music"></i>';
       }
-    });
+    }
 
-    resetBtn.addEventListener("click", () => {
+    function resetAudio() {
       audio.currentTime = 0;
       if (audio.paused) {
         audio.play();
         playPauseBtn.textContent = "⏸️";
+        floatingMusicBtn.innerHTML = '<i class="fas fa-pause"></i>';
       }
-    });
+    }
 
     audio.addEventListener("timeupdate", () => {
       const progress = (audio.currentTime / audio.duration) * 100;
@@ -3131,88 +3413,32 @@
       audio.currentTime = time;
     });
 
-    // Autoplay con botón
-    document.getElementById("autoPlayButton").addEventListener("click", () => {
+    autoPlayButton.addEventListener("click", () => {
       audio.play().then(() => {
-        document.getElementById("autoPlayButton").remove();
+        autoPlayButton.style.display = "none";
         playPauseBtn.textContent = "⏸️";
+        floatingMusicBtn.innerHTML = '<i class="fas fa-pause"></i>';
       }).catch(() => {
-        alert("Debes permitir el sonido en tu navegador.");
+        alert("Por favor, permite el sonido en tu navegador para continuar.");
       });
     });
 
-    // Manejo si el audio no carga
-    audio.addEventListener("error", () => {
-      alert("No se pudo cargar la canción. Asegúrate de que el archivo MP3 esté en la carpeta del proyecto.");
-    });
+    floatingMusicBtn.addEventListener("click", togglePlay);
 
-    // Nuevo script para el botón flotante de música
-    const floatingMusicBtn = document.getElementById('floatingMusicBtn');
-    floatingMusicBtn.addEventListener('click', () => {
-      if (audio.paused) {
-        audio.play();
-        floatingMusicBtn.innerHTML = '<i class="fas fa-pause"></i>';
-      } else {
-        audio.pause();
-        floatingMusicBtn.innerHTML = '<i class="fas fa-music"></i>';
-      }
-    });
-
-    // Actualizar el botón flotante cuando cambie el estado del audio
-    audio.addEventListener('play', () => {
+    audio.addEventListener("play", () => {
+      playPauseBtn.textContent = "⏸️";
       floatingMusicBtn.innerHTML = '<i class="fas fa-pause"></i>';
     });
 
-    audio.addEventListener('pause', () => {
+    audio.addEventListener("pause", () => {
+      playPauseBtn.textContent = "▶️";
       floatingMusicBtn.innerHTML = '<i class="fas fa-music"></i>';
     });
 
-    // Mejorar el contador con elementos separados
-    function actualizarContadorElegante(dias, horas, minutos) {
-      const contador = document.getElementById('contador');
-      contador.innerHTML = `
-        <div class="countdown-container">
-          <div class="countdown-item">
-            <div class="countdown-number">${String(dias).padStart(2, '0')}</div>
-            <div class="countdown-label">días</div>
-          </div>
-          <div class="countdown-item">
-            <div class="countdown-number">${String(horas).padStart(2, '0')}</div>
-            <div class="countdown-label">horas</div>
-          </div>
-          <div class="countdown-item">
-            <div class="countdown-number">${String(minutos).padStart(2, '0')}</div>
-            <div class="countdown-label">minutos</div>
-          </div>
-        </div>
-      `;
-    }
-
-    // Modificar la función calcularTiempo para usar el nuevo contador
-    function calcularTiempo() {
-      const ahora = new Date();
-      const fechaEvento = new Date('2025-08-31T17:00:00');
-      
-      const msRestantes = fechaEvento - ahora;
-      if (msRestantes <= 0) {
-        document.getElementById("contador").innerHTML = `
-          <div class="countdown-container">
-            <div class="countdown-item special">
-              <div class="countdown-number">¡Hoy</div>
-              <div class="countdown-label">es el día!</div>
-            </div>
-          </div>
-        `;
-        return;
-      }
-
-      const segundosTotales = Math.floor(msRestantes / 1000);
-      const dias = Math.floor(segundosTotales / (60 * 60 * 24));
-      const horas = Math.floor((segundosTotales % (60 * 60 * 24)) / (60 * 60));
-      const minutos = Math.floor((segundosTotales % (60 * 60)) / 60);
-
-      actualizarContadorElegante(dias, horas, minutos);
-    }
+    // Manejo de errores del audio
+    audio.addEventListener("error", () => {
+      alert("No se pudo cargar la música. Por favor, verifica que el archivo de audio existe en la carpeta correcta.");
+    });
   </script>
 
   <script>
@@ -3269,3 +3495,4 @@
 
 </body>
 </html>
+
