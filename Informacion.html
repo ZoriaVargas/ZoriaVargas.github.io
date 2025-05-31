@@ -2491,19 +2491,13 @@
       }
 
       .location-button {
-        max-width: 240px;
         padding: 0.7rem 1.2rem;
         font-size: 0.9rem;
       }
 
-      .custom-audio-controls {
-        width: 94%;
-        padding: 0.8rem;
-      }
-
       .custom-audio-controls button {
-        width: 32px;
-        height: 32px;
+        width: 35px;
+        height: 35px;
       }
 
       .envelope {
@@ -3348,6 +3342,192 @@
       cursor: pointer;
       max-width: 130px;
     }
+
+    /* Ajustes de ancho para los elementos */
+    .dress-code {
+      width: 85%;
+      max-width: 280px;
+      gap: 1rem;
+      margin: 1.2rem auto;
+    }
+
+    .dress-code-item {
+      padding: 1.1rem;
+      margin: 0.4rem 0;
+      width: 100%;
+      max-width: 260px;
+    }
+
+    .dress-code-item h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .dress-code-item p {
+      font-size: 0.9rem;
+      margin: 0.4rem 0;
+    }
+
+    .dress-code-colors {
+      gap: 0.5rem;
+      margin-top: 0.7rem;
+    }
+
+    .color-circle {
+      width: 22px;
+      height: 22px;
+    }
+
+    .restricted-notice {
+      width: 85%;
+      max-width: 280px;
+      padding: 1.2rem;
+      margin: 1rem auto;
+    }
+
+    .mesa-regalos {
+      width: 85%;
+      max-width: 280px;
+      padding: 1.3rem;
+      margin: 1rem auto;
+    }
+
+    .cuenta-info {
+      width: 100%;
+      max-width: 250px;
+      padding: 1.1rem;
+      margin: 0.8rem auto;
+    }
+
+    .cuenta-info p {
+      font-size: 0.9em;
+      line-height: 1.5;
+      margin-bottom: 0.4rem;
+    }
+
+    .envelope {
+      width: 60px;
+      height: 36px;
+      margin: 1.2rem auto;
+    }
+
+    /* Ajustes responsive */
+    @media (max-width: 768px) {
+      .dress-code {
+        width: 88%;
+        max-width: 260px;
+      }
+
+      .dress-code-item {
+        padding: 1rem;
+        max-width: 240px;
+      }
+
+      .restricted-notice {
+        width: 88%;
+        max-width: 260px;
+        padding: 1.1rem;
+      }
+
+      .mesa-regalos {
+        width: 88%;
+        max-width: 260px;
+        padding: 1.2rem;
+      }
+
+      .cuenta-info {
+        max-width: 230px;
+        padding: 1rem;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .dress-code {
+        width: 90%;
+        max-width: 240px;
+      }
+
+      .dress-code-item {
+        padding: 0.9rem;
+        max-width: 220px;
+      }
+
+      .dress-code-item h3 {
+        font-size: 1.1rem;
+      }
+
+      .dress-code-item p {
+        font-size: 0.85rem;
+      }
+
+      .color-circle {
+        width: 20px;
+        height: 20px;
+      }
+
+      .restricted-notice {
+        width: 90%;
+        max-width: 240px;
+        padding: 1rem;
+      }
+
+      .mesa-regalos {
+        width: 90%;
+        max-width: 240px;
+        padding: 1.1rem;
+      }
+
+      .cuenta-info {
+        max-width: 210px;
+        padding: 0.9rem;
+      }
+
+      .cuenta-info p {
+        font-size: 0.85em;
+      }
+    }
+
+    /* Ajustes para el segundo divisiones */
+    .pantalla-rosgold .divisiones {
+      max-width: 360px;
+      width: 85%;
+      padding: 1.8rem;
+    }
+
+    .pantalla-rosgold .divisiones h1 {
+      font-size: 1.6em !important;
+      line-height: 1.4;
+      margin-bottom: 0.8rem;
+    }
+
+    .pantalla-rosgold img[alt="diseño"] {
+      width: 90px;
+      margin: 1.2rem auto;
+    }
+
+    @media (max-width: 768px) {
+      .pantalla-rosgold .divisiones {
+        max-width: 320px;
+        width: 88%;
+        padding: 1.5rem;
+      }
+
+      .pantalla-rosgold img[alt="diseño"] {
+        width: 80px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .pantalla-rosgold .divisiones {
+        max-width: 280px;
+        width: 90%;
+        padding: 1.3rem;
+      }
+
+      .pantalla-rosgold img[alt="diseño"] {
+        width: 70px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -3469,10 +3649,10 @@
           <p>Vestido largo o cocktail</p>
           <p>Colores sugeridos:</p>
           <div class="dress-code-colors">
-            <div class="color-circle" style="background: #4B0082;"></div>
-            <div class="color-circle" style="background: #800080;"></div>
-            <div class="color-circle" style="background: #483D8B;"></div>
-            <div class="color-circle" style="background: #2F4F4F;"></div>
+            <div class="color-circle" style="background: #4B0082;" title="Índigo"></div>
+            <div class="color-circle" style="background: #800080;" title="Púrpura"></div>
+            <div class="color-circle" style="background: #483D8B;" title="Azul Oscuro"></div>
+            <div class="color-circle" style="background: #2F4F4F;" title="Gris Pizarra"></div>
           </div>
         </div>
         <div class="dress-code-item">
@@ -3481,9 +3661,9 @@
           <p>Traje formal oscuro</p>
           <p>Corbata o moño</p>
           <div class="dress-code-colors">
-            <div class="color-circle" style="background: #000000;"></div>
-            <div class="color-circle" style="background: #1a1a1a;"></div>
-            <div class="color-circle" style="background: #0F1626;"></div>
+            <div class="color-circle" style="background: #000000;" title="Negro"></div>
+            <div class="color-circle" style="background: #1a1a1a;" title="Negro Carbón"></div>
+            <div class="color-circle" style="background: #0F1626;" title="Azul Marino"></div>
           </div>
         </div>
       </div>
@@ -3497,7 +3677,7 @@
       
       <div class="mesa-regalos">
         <p style="font-size: 1.2em; margin-bottom: 2rem; line-height: 1.6;">
-          En este día mi mayor regalo es que me acompañes, pero si deseas obsequiarme algo más, agradezco sus sobres con efectivo o transferencia a la siguiente cuenta:
+          Tu presencia es mi mejor regalo, pero si deseas obsequiarme algo más, agradezco tu detalle en efectivo o transferencia a la siguiente cuenta:
         </p>
         
         <div class="cuenta-info">
@@ -3666,4 +3846,5 @@
 
 </body>
 </html>
+
 
