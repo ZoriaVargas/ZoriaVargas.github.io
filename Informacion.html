@@ -56,10 +56,78 @@
 
     /* Ajuste específico para la primera pantalla */
     .pantalla-inicial {
-      padding-top: 700px;
+      padding-top: 600px;
       display: flex;
       flex-direction: column;
       align-items: center;
+    }
+
+    /* Mejoras específicas para cada tipo de pantalla */
+    .pantalla-inicial img {
+      opacity: 0.9;
+      filter: brightness(1.15) contrast(1.25) saturate(1.15);
+      object-position: center 30%;
+    }
+
+    .pantalla-inicial:hover img {
+      opacity: 0.98;
+      filter: brightness(1.25) contrast(1.35) saturate(1.25);
+    }
+
+    /* Optimización específica para fotos con rostros en el centro */
+    .pantalla-inicial img,
+    .celebracion img,
+    .deseos img {
+      object-position: center 35%;
+      opacity: 0.88;
+    }
+
+    /* Para secciones donde queremos ver más del contexto */
+    .regalos img {
+      object-position: center 40%;
+      opacity: 0.85;
+    }
+
+    /* Estilos específicos para cada sección */
+    .celebracion img {
+      opacity: 0.88;
+      filter: brightness(1.1) contrast(1.2) saturate(1.1);
+    }
+
+    .celebracion:hover img {
+      opacity: 0.95;
+      filter: brightness(1.2) contrast(1.3) saturate(1.2);
+    }
+
+    .regalos img {
+      opacity: 0.85;
+      filter: brightness(1.05) contrast(1.15) saturate(1.05);
+    }
+
+    .regalos:hover img {
+      opacity: 0.92;
+      filter: brightness(1.15) contrast(1.25) saturate(1.15);
+    }
+
+    .deseos img {
+      opacity: 0.88;
+      filter: brightness(1.1) contrast(1.2) saturate(1.1);
+    }
+
+    .deseos:hover img {
+      opacity: 0.95;
+      filter: brightness(1.2) contrast(1.3) saturate(1.2);
+    }
+
+    /* Mejoras para el código de vestimenta */
+    .half-screen:not(.pantalla-inicial):not(.pantalla-rosgold):not(.celebracion):not(.regalos):not(.deseos) img {
+      opacity: 0.82;
+      filter: brightness(1.05) contrast(1.15) saturate(1.05);
+    }
+
+    .half-screen:not(.pantalla-inicial):not(.pantalla-rosgold):not(.celebracion):not(.regalos):not(.deseos):hover img {
+      opacity: 0.9;
+      filter: brightness(1.15) contrast(1.25) saturate(1.15);
     }
 
     .section-hidden {
@@ -105,18 +173,19 @@
       align-items: center;
       text-align: center;
       border-radius: 30px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 200, 220, 0.15));
-      backdrop-filter: blur(10px);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.75), rgba(248, 200, 220, 0.15));
+      backdrop-filter: blur(20px);
       border: 1px solid rgba(183, 110, 121, 0.2);
-      box-shadow: 0 8px 32px rgba(183, 110, 121, 0.15);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 12px 40px rgba(183, 110, 121, 0.2), 0 4px 20px rgba(0, 0, 0, 0.08);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       animation: slideUp 1s ease-out forwards;
     }
 
     .divisiones:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
-      background: rgba(255, 255, 255, 0.95);
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(183, 110, 121, 0.3), 0 8px 25px rgba(0, 0, 0, 0.12);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(248, 200, 220, 0.2));
+      border-color: rgba(183, 110, 121, 0.4);
     }
 
     .half-screen img {
@@ -126,17 +195,202 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.6;
-      filter: brightness(0.85) contrast(1.1) blur(1px);
+      object-position: center center;
+      opacity: 0.85;
+      filter: brightness(1.1) contrast(1.2) saturate(1.1);
       z-index: 1;
-      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-      animation: zoomInOut 20s ease-in-out infinite;
+      transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: zoomInOut 25s ease-in-out infinite;
     }
 
     .half-screen:hover img {
-      opacity: 0.7;
-      filter: brightness(0.9) contrast(1.15) blur(0);
-      transform: scale(1.02);
+      opacity: 0.95;
+      filter: brightness(1.2) contrast(1.3) saturate(1.2);
+      transform: scale(1.05);
+    }
+
+    /* Animación de zoom mejorada */
+    @keyframes zoomInOut {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.08);
+      }
+    }
+
+    /* Efectos adicionales para mejorar la visualización */
+    .half-screen {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .half-screen::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(183, 110, 121, 0.15) 0%,
+        transparent 30%,
+        rgba(212, 175, 55, 0.1) 70%,
+        rgba(156, 109, 209, 0.1) 100%
+      );
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    .half-screen:hover::before {
+      opacity: 1;
+    }
+
+    /* Efecto de partículas flotantes */
+    .half-screen::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.1) 1px, transparent 1px),
+        radial-gradient(circle at 40% 40%, rgba(183, 110, 121, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px, 80px 80px, 60px 60px;
+      animation: floatParticles 20s linear infinite;
+      z-index: 1;
+      opacity: 0.3;
+    }
+
+    @keyframes floatParticles {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(-100px) rotate(360deg); }
+    }
+
+    /* Mejoras en la transición de las imágenes */
+    .half-screen img {
+      will-change: transform, filter, opacity;
+      transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Efecto de profundidad mejorado */
+    .divisiones, .info-section {
+      position: relative;
+      z-index: 3;
+    }
+
+    /* Clases utilitarias para ajustar la posición de las imágenes */
+    .img-focus-top {
+      object-position: center 25% !important;
+    }
+
+    .img-focus-center {
+      object-position: center center !important;
+    }
+
+    .img-focus-bottom {
+      object-position: center 75% !important;
+    }
+
+    /* Ajustes específicos para diferentes tipos de fotos */
+    .img-portrait {
+      object-position: center 30% !important;
+      /* Optimización para fotos con rostros en el centro */
+      object-fit: cover;
+      opacity: 0.6 !important;
+    }
+
+    .img-landscape {
+      object-position: center center !important;
+      /* Para fotos horizontales o de paisaje */
+      object-fit: cover;
+      opacity: 0.5 !important;
+    }
+
+    .img-group {
+      object-position: center 40% !important;
+      /* Para fotos grupales donde queremos ver más contexto */
+      object-fit: cover;
+      opacity: 0.55 !important;
+    }
+
+    /* Mejoras específicas para fotos con rostros */
+    .img-portrait:hover {
+      object-position: center 25% !important;
+      opacity: 0.7 !important;
+      transition: object-position 0.8s ease, opacity 0.8s ease;
+    }
+
+    .img-landscape:hover {
+      opacity: 0.6 !important;
+      transition: opacity 0.8s ease;
+    }
+
+    .img-group:hover {
+      opacity: 0.65 !important;
+      transition: opacity 0.8s ease;
+    }
+
+    /* Ajustes para diferentes tamaños de pantalla */
+    @media (max-width: 768px) {
+      .img-portrait {
+        object-position: center 35% !important;
+      }
+      
+      .img-landscape {
+        object-position: center 45% !important;
+      }
+      
+      .img-group {
+        object-position: center 50% !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .img-portrait {
+        object-position: center 40% !important;
+      }
+      
+      .img-landscape {
+        object-position: center 50% !important;
+      }
+      
+      .img-group {
+        object-position: center 55% !important;
+      }
+    }
+
+    /* Efecto de brillo en los bordes */
+    .divisiones::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, 
+        var(--rosa-intenso), 
+        var(--dorado), 
+        var(--violeta), 
+        var(--rosa-intenso));
+      border-radius: 32px;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      animation: borderGlow 3s ease-in-out infinite;
+    }
+
+    .divisiones:hover::before {
+      opacity: 0.8;
+    }
+
+    @keyframes borderGlow {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 0.8; }
     }
 
     .pantalla-inicial .divisiones {
@@ -195,12 +449,41 @@
     .divisiones h1 {
       position: relative;
       overflow: hidden;
-      background: linear-gradient(45deg, var(--rosegold-dark), var(--dorado));
+      background: linear-gradient(45deg, var(--rosegold-dark), var(--dorado), var(--violeta), var(--rosegold-dark));
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: shimmer 3s infinite;
-      background-size: 200% 100%;
+      animation: shimmer 4s infinite;
+      background-size: 300% 100%;
+      text-shadow: 0 0 30px rgba(183, 110, 121, 0.3);
+      transition: all 0.5s ease;
+    }
+
+    .divisiones h1:hover {
+      transform: scale(1.05);
+      text-shadow: 0 0 40px rgba(183, 110, 121, 0.5);
+    }
+
+    /* Efecto de brillo que se mueve por el texto */
+    .divisiones h1::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+      );
+      animation: textShine 3s infinite;
+    }
+
+    @keyframes textShine {
+      0% { left: -100%; }
+      100% { left: 100%; }
     }
 
     .divisiones h1:last-child {
@@ -236,33 +519,105 @@
       align-items: center;
       justify-content: center;
       gap: 1.2rem;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 200, 220, 0.15));
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(183, 110, 121, 0.2);
-      box-shadow: 0 8px 32px rgba(183, 110, 121, 0.15);
-      animation: pulseGlow 3s infinite;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.75), rgba(248, 200, 220, 0.15));
+      backdrop-filter: blur(18px);
+      border: 2px solid rgba(183, 110, 121, 0.2);
+      box-shadow: 0 10px 35px rgba(183, 110, 121, 0.2);
+      animation: audioGlow 4s ease-in-out infinite;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .custom-audio-controls::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(183, 110, 121, 0.1),
+        transparent
+      );
+      animation: audioShine 4s infinite;
+    }
+
+    @keyframes audioGlow {
+      0%, 100% { 
+        box-shadow: 0 10px 35px rgba(183, 110, 121, 0.25);
+        border-color: rgba(183, 110, 121, 0.3);
+      }
+      50% { 
+        box-shadow: 0 15px 45px rgba(183, 110, 121, 0.4);
+        border-color: rgba(183, 110, 121, 0.5);
+      }
+    }
+
+    @keyframes audioShine {
+      0% { left: -100%; }
+      100% { left: 100%; }
     }
 
     .custom-audio-controls button {
-      background: linear-gradient(45deg, var(--rosegold-dark), var(--dorado));
+      background: linear-gradient(45deg, var(--rosegold-dark), var(--dorado), var(--violeta));
+      background-size: 200% 100%;
       color: white;
       border: none;
       border-radius: 50%;
-      width: 45px;
-      height: 45px;
-      font-size: 1.2rem;
+      width: 48px;
+      height: 48px;
+      font-size: 1.3rem;
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(183, 110, 121, 0.2);
-      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(183, 110, 121, 0.3);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
+      overflow: hidden;
+      animation: buttonPulse 3s ease-in-out infinite;
+    }
+
+    .custom-audio-controls button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, var(--dorado), var(--violeta), var(--rosegold-dark));
+      background-size: 200% 200%;
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      animation: buttonRotate 4s linear infinite;
+    }
+
+    .custom-audio-controls button:hover::before {
+      opacity: 1;
     }
 
     .custom-audio-controls button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 12px var(--sombra);
-      background: linear-gradient(45deg, var(--rosa-intenso), var(--violeta));
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 8px 25px rgba(183, 110, 121, 0.5);
+    }
+
+    @keyframes buttonPulse {
+      0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 6px 20px rgba(183, 110, 121, 0.3);
+      }
+      50% { 
+        transform: scale(1.05);
+        box-shadow: 0 8px 25px rgba(183, 110, 121, 0.4);
+      }
+    }
+
+    @keyframes buttonRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     #progressBar {
@@ -347,18 +702,54 @@
       position: fixed;
       top: 20px;
       left: 20px;
-      padding: 1rem 2rem;
-      background: linear-gradient(45deg, var(--rosa-intenso), var(--violeta));
+      padding: 1.2rem 2.5rem;
+      background: linear-gradient(45deg, var(--rosa-intenso), var(--violeta), var(--dorado));
+      background-size: 200% 100%;
       color: white;
       border: none;
-      border-radius: 25px;
-      font-size: 1rem;
+      border-radius: 30px;
+      font-size: 1.1rem;
       font-weight: 600;
       cursor: pointer;
       z-index: 9999;
-      box-shadow: 0 4px 15px var(--sombra);
-      transition: all 0.3s ease;
-      animation: float 3s infinite ease-in-out;
+      box-shadow: 0 8px 25px rgba(183, 110, 121, 0.4);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: autoPlayFloat 4s infinite ease-in-out;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    #autoPlayButton::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+      );
+      animation: autoPlayShine 3s infinite;
+    }
+
+    @keyframes autoPlayFloat {
+      0%, 100% { 
+        transform: translateY(0) scale(1);
+        box-shadow: 0 8px 25px rgba(183, 110, 121, 0.4);
+      }
+      50% { 
+        transform: translateY(-15px) scale(1.05);
+        box-shadow: 0 15px 35px rgba(183, 110, 121, 0.6);
+      }
+    }
+
+    @keyframes autoPlayShine {
+      0% { left: -100%; }
+      100% { left: 100%; }
     }
 
     #autoPlayButton:hover {
@@ -382,10 +773,13 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      background: rgba(255, 255, 255, 0.95);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(248, 200, 220, 0.12));
       border-radius: 25px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(183, 110, 121, 0.18);
+      box-shadow: 0 10px 35px rgba(183, 110, 121, 0.15), 0 4px 15px rgba(0, 0, 0, 0.06);
       animation: fadeIn 1s ease-out 0.3s forwards;
+      transition: all 0.4s ease;
     }
 
     .info-section h2 {
@@ -439,6 +833,39 @@
     @media (max-width: 768px) {
       .half-screen {
         padding: 1rem 0;
+      }
+
+      /* Mejoras para móvil en las imágenes */
+      .half-screen img {
+        opacity: 0.6;
+        filter: brightness(1.02) contrast(1.08) saturate(1.02);
+        object-position: center 40%;
+      }
+
+      .half-screen:hover img {
+        opacity: 0.7;
+        filter: brightness(1.08) contrast(1.12) saturate(1.08);
+      }
+
+      /* Ajustes específicos para móvil según el tipo de sección */
+      .pantalla-inicial img {
+        object-position: center 25%;
+        opacity: 0.65;
+      }
+
+      .celebracion img {
+        object-position: center 30%;
+        opacity: 0.6;
+      }
+
+      .regalos img {
+        object-position: center 35%;
+        opacity: 0.55;
+      }
+
+      .deseos img {
+        object-position: center 30%;
+        opacity: 0.6;
       }
 
       .divisiones {
@@ -743,6 +1170,33 @@
     }
 
     @media (max-width: 360px) {
+      /* Ajustes críticos para pantallas muy pequeñas */
+      .half-screen img {
+        object-position: center 45%;
+        object-fit: cover;
+        opacity: 0.55;
+      }
+
+      .pantalla-inicial img {
+        object-position: center 20%;
+        opacity: 0.6;
+      }
+
+      .celebracion img {
+        object-position: center 25%;
+        opacity: 0.55;
+      }
+
+      .regalos img {
+        object-position: center 30%;
+        opacity: 0.5;
+      }
+
+      .deseos img {
+        object-position: center 25%;
+        opacity: 0.55;
+      }
+
       .divisiones {
         width: 82%;
         max-width: 300px;
@@ -894,8 +1348,10 @@
     }
 
     .dress-code-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      transform: translateY(-6px);
+      box-shadow: 0 15px 40px rgba(183, 110, 121, 0.25), 0 6px 20px rgba(0, 0, 0, 0.1);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(248, 200, 220, 0.18));
+      border-color: rgba(183, 110, 121, 0.3);
     }
 
     .dress-code-item i {
@@ -1023,16 +1479,56 @@
       bottom: 20px;
       right: 20px;
       z-index: 1000;
-      background: linear-gradient(45deg, var(--rosa-intenso), var(--violeta));
+      background: linear-gradient(45deg, var(--rosa-intenso), var(--violeta), var(--dorado));
+      background-size: 200% 100%;
       border-radius: 50%;
-      width: 60px;
-      height: 60px;
+      width: 65px;
+      height: 65px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 25px rgba(183, 110, 121, 0.4);
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      animation: musicFloat 4s ease-in-out infinite;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .floating-music::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, var(--dorado), var(--violeta), var(--rosa-intenso));
+      background-size: 200% 200%;
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      animation: musicRotate 6s linear infinite;
+    }
+
+    .floating-music:hover::before {
+      opacity: 1;
+    }
+
+    @keyframes musicFloat {
+      0%, 100% { 
+        transform: translateY(0) scale(1);
+        box-shadow: 0 8px 25px rgba(183, 110, 121, 0.4);
+      }
+      50% { 
+        transform: translateY(-10px) scale(1.1);
+        box-shadow: 0 15px 35px rgba(183, 110, 121, 0.6);
+      }
+    }
+
+    @keyframes musicRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     .floating-music:hover {
@@ -2069,33 +2565,64 @@
     /* Animaciones al deslizar y efectos mejorados */
     .section-hidden {
       opacity: 0;
-      transform: translateY(8rem);
-      transition: all 1s;
+      transform: translateY(8rem) scale(0.95);
+      transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      filter: blur(5px);
     }
 
     .section-visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
+      filter: blur(0);
     }
 
     .fade-in {
-      animation: fadeIn 1s ease-out forwards;
+      animation: fadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
       opacity: 0;
+      transform: scale(0.9);
     }
 
     .slide-up {
-      animation: slideUp 1s ease-out forwards;
+      animation: slideUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
       opacity: 0;
+      transform: translateY(4rem) scale(0.95);
     }
 
     .slide-in-left {
-      animation: slideInLeft 1s ease-out forwards;
+      animation: slideInLeft 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
       opacity: 0;
+      transform: translateX(-4rem) scale(0.95);
     }
 
     .slide-in-right {
-      animation: slideInRight 1s ease-out forwards;
+      animation: slideInRight 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
       opacity: 0;
+      transform: translateX(4rem) scale(0.95);
+    }
+
+    /* Efecto de entrada con rebote */
+    .bounce-in {
+      animation: bounceIn 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+      opacity: 0;
+      transform: scale(0.3);
+    }
+
+    @keyframes bounceIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.3);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      70% {
+        transform: scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     @keyframes fadeIn {
@@ -2192,19 +2719,88 @@
       justify-content: center;
       gap: 20px;
       margin: 30px 0;
-      padding: 20px;
-      background: linear-gradient(135deg, var(--rosa-intenso), var(--violeta));
-      border-radius: 15px;
+      padding: 25px;
+      background: linear-gradient(135deg, var(--rosa-intenso), var(--violeta), var(--dorado));
+      background-size: 200% 100%;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(183, 110, 121, 0.4);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      animation: countdownGlow 4s ease-in-out infinite;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contador::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+      );
+      animation: countdownShine 3s infinite;
+    }
+
+    @keyframes countdownGlow {
+      0%, 100% { 
+        background-position: 0% 50%;
+        box-shadow: 0 8px 30px rgba(183, 110, 121, 0.4);
+      }
+      50% { 
+        background-position: 100% 50%;
+        box-shadow: 0 12px 40px rgba(183, 110, 121, 0.6);
+      }
+    }
+
+    @keyframes countdownShine {
+      0% { left: -100%; }
+      100% { left: 100%; }
     }
 
     .contador-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 15px;
-      border-radius: 10px;
-      min-width: 80px;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 18px;
+      border-radius: 15px;
+      min-width: 85px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contador-item:hover {
+      transform: translateY(-5px) scale(1.05);
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+    }
+
+    .contador-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+      );
+      transition: left 0.6s ease;
+    }
+
+    .contador-item:hover::before {
+      left: 100%;
     }
 
     .numero {
@@ -2906,7 +3502,8 @@
     .location-button {
       width: 100%;
       padding: 1rem 1.5rem;
-      background: linear-gradient(135deg, var(--rosegold-dark), var(--dorado));
+      background: linear-gradient(135deg, var(--rosegold-dark), var(--dorado), var(--violeta));
+      background-size: 200% 100%;
       color: white;
       text-decoration: none;
       border-radius: 50px;
@@ -2916,9 +3513,43 @@
       align-items: center;
       justify-content: center;
       gap: 0.8rem;
-      border: 1px solid rgba(183, 110, 121, 0.3);
-      box-shadow: 0 4px 15px rgba(183, 110, 121, 0.2);
-      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      box-shadow: 0 6px 20px rgba(183, 110, 121, 0.3);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      animation: buttonGlow 4s ease-in-out infinite;
+    }
+
+    .location-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+      );
+      transition: left 0.5s ease;
+    }
+
+    .location-button:hover::before {
+      left: 100%;
+    }
+
+    @keyframes buttonGlow {
+      0%, 100% { 
+        background-position: 0% 50%;
+        box-shadow: 0 6px 20px rgba(183, 110, 121, 0.3);
+      }
+      50% { 
+        background-position: 100% 50%;
+        box-shadow: 0 8px 25px rgba(183, 110, 121, 0.5);
+      }
     }
 
     .location-button:hover {
@@ -3534,7 +4165,7 @@
   <button id="autoPlayButton">✨ Iniciar experiencia ✨</button>
 
   <div class="half-screen pantalla-inicial">
-    <img src="Sesion_ft_1.jpg" alt="Sesión Foto" />
+    <img src="2.jpg" alt="Fondo Principal" class="img-portrait" />
     <div class="divisiones">
       <h1>Mis XV años</h1>
       <h1>Frida Rocha</h1>
@@ -3562,7 +4193,7 @@
   </div>
 
   <div class="half-screen celebracion">
-    <img src="Sesion_ft_1.jpg" alt="Fondo Celebración" />
+    <img src="2.jpg" alt="Fondo Ceremonia" class="img-portrait" />
     <div class="divisiones" style="max-width: 500px;">
       <h1 style="font-size: 3em;">Ceremonia</h1>
       
@@ -3595,10 +4226,12 @@
             <i class="fas fa-map-marker-alt"></i>
             Ver ubicación
           </a>
-          <a href="https://forms.gle/tuFormularioAqui" target="_blank" class="custom-button location-button">
-            <i class="fas fa-clipboard-check"></i>
-            Confirmar Asistencia
-          </a>
+            <a href="https://wa.me/528126550471?text=Confirmo%20mi%20asistencia%20a%20los%20XV%20de%20Frida" 
+              target="_blank" 
+              class="custom-button location-button whatsapp">
+              <i class="fab fa-whatsapp"></i>
+              Confirmar Asistencia
+            </a>
         </div>
       </div>
     </div>
@@ -3606,9 +4239,9 @@
 
   <!-- Nueva sección de Recepción -->
   <div class="half-screen celebracion">
-    <img src="salon.jpg" alt="Fondo Recepción" />
+    <img src="3.jpg" alt="Fondo Recepción" class="img-portrait" />
     <div class="divisiones" style="max-width: 500px;">
-      <h1 style="font-size: 3em;">Recepción</h1>
+      <h1 style="font-size:3em;">Recepción</h1>
       
       <div class="info-section">
         <h2>📍 Salón de Eventos</h2>
@@ -3630,6 +4263,7 @@
 
   <!-- Nueva sección de Código de Vestimenta -->
   <div class="half-screen">
+    <img src="6.jpg" alt="Fondo Código de Vestimenta" class="img-landscape" />
     <div class="divisiones" style="max-width: 800px;">
       <h1 style="font-size: 3em;">Código de Vestimenta</h1>
       
@@ -3672,6 +4306,7 @@
 
   <!-- Nueva sección de Mesa de Regalos -->
   <div class="half-screen regalos">
+    <img src="2.jpg" alt="Fondo Mesa de Regalos" class="img-portrait" />
     <div class="divisiones" style="max-width: 500px;">
       <h1 style="font-size: 3em;">Mesa de Regalos</h1>
       
@@ -3699,7 +4334,7 @@
 
   <!-- Nueva sección de Buzón de los Deseos -->
   <div class="half-screen deseos">
-    <img src="Sesion_ft_1.jpg" alt="Fondo Deseos" />
+    <img src="3.jpg" alt="Fondo Deseos" class="img-portrait" />
     <div class="divisiones" style="max-width: 500px;">
       <h1 style="font-size: 3em;">Buzón de los Deseos</h1>
       
@@ -3846,5 +4481,6 @@
 
 </body>
 </html>
+
 
 
