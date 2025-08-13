@@ -279,9 +279,9 @@
     .half-screen img,
     .img-portrait {
       width: 100vw !important;
-      height: 100vh !important;
+      height: 70vh !important;
       max-width: 100vw !important;
-      max-height: 100vh !important;
+      max-height: 70vh !important;
       object-fit: cover !important;
       object-position: center 35% !important;
       position: absolute !important;
@@ -291,6 +291,16 @@
       opacity: 0.9 !important;
       filter: brightness(1.08) contrast(1.08) saturate(1.08) !important;
     }
+  }
+
+@media (max-width: 480px) {
+  .half-screen img,
+  .img-portrait {
+    height: 55vh !important;
+    max-height: 55vh !important;
+    object-position: center 40% !important;
+  }
+}
   
     .half-screen {
       min-height: 100vh !important;
@@ -4782,6 +4792,7 @@
 
 </body>
 </html>
+
 
 
 
