@@ -35,7 +35,7 @@ body {
   height: 100%;
   object-fit: cover;
   z-index: -1;
-  filter: brightness(1.1) contrast(1.2) saturate(1.2);
+  filter: brightness(1.2) contrast(1.2) saturate(1.2);
   transition: all 1s ease;
 }
 .divisiones {
@@ -163,7 +163,8 @@ h1,h2,p {
   flex-wrap: wrap;
   gap: 0.8rem;
   justify-content: center;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
+  flex-direction: column; /* para que botones estén hacia abajo */
 }
 .contador {
   display: flex;
@@ -221,7 +222,7 @@ h1,h2,p {
     <h1>Mis XV años</h1>
     <h1>Frida Rocha</h1>
     <div class="audio-wrapper">
-      <audio id="miAudio" src="lana del rey - salvatore (philipz flip).mp3"></audio>
+      <audio id="miAudio" src="Beauty and the Beast (From Beauty and the Beast) [Instrumental Philharmonic Orchestra Version].mp3"></audio>
       <div class="custom-audio-controls">
         <button id="playPauseBtn" onclick="togglePlay()">▶️</button>
         <input type="range" id="progressBar" value="0" min="0" max="100"/>
@@ -236,7 +237,7 @@ h1,h2,p {
   <img src="1.jpg" alt="Fondo Rosas" class="img-portrait"/>
   <div class="divisiones">
     <img src="corona.png" alt="diseño" style="width:150px;margin-bottom:2rem;">
-    <h1>Agradezco a mis padres por su amor y apoyo, haciendo posible este momento inolvidable.</h1>
+    <h1>En este día tan especial, desde lo más profundo de mi alma quiero agradecer a mis padres por su amor incondicional, apoyo en cada paso de mi vida y cada esfuerzo y sacrificio que han hecho para que este momento sea tan hermoso e inolvidable</h1>
     <img src="pie.png" alt="diseño" style="width:120px;margin:2rem 0;">
     <h1>Carmen Janeth Torres Luna</h1>
     <h1>Juan Miguel Rocha Velazco</h1>
@@ -257,9 +258,9 @@ h1,h2,p {
     <p><strong>Hora:</strong> 17:00 hrs</p>
     <p><strong>Lugar:</strong> Iglesia de Nuestra Señora Del Perpetuo Socorro</p>
     <div class="button-container">
-      <a href="#" class="custom-button location-button"><i class="fas fa-map-marker-alt"></i> Ver ubicación</a>
-      <a href="#" class="custom-button wishes-button"><i class="fab fa-whatsapp"></i> Confirmar Asistencia</a>
-      <a href="#" class="custom-button whatsapp-cancel"><i class="fab fa-whatsapp"></i> No Podré Asistir</a>
+      <a href="https://maps.app.goo.gl/xefMnayaojpAtgYe7?g_st=awb" target="_blank" class="custom-button location-button"><i class="fas fa-map-marker-alt"></i> Ver ubicación</a>
+      <a href="https://wa.me/528115048509?text=Confirmo%20mi%20asistencia%20a%20los%20XV%20de%20Frida" target="_blank" class="custom-button wishes-button"><i class="fab fa-whatsapp"></i> Confirmar Asistencia</a>
+      <a href="https://wa.me/528115048509?text=No%20podré%20asistir%20a%20los%20XV%20de%20Frida" target="_blank" class="custom-button whatsapp-cancel"><i class="fab fa-whatsapp"></i> No Podré Asistir</a>
     </div>
   </div>
 </div>
@@ -273,7 +274,7 @@ h1,h2,p {
     <p><strong>Hora:</strong> 19:00 hrs</p>
     <p><strong>Lugar:</strong> La Cascada Onix y Ambar</p>
     <div class="button-container">
-      <a href="#" class="custom-button location-button"><i class="fas fa-map-marker-alt"></i> Ver ubicación</a>
+      <a href="https://maps.app.goo.gl/xHctfeogYbsG7HCT9?g_st=awb" target="_blank" class="custom-button location-button"><i class="fas fa-map-marker-alt"></i> Ver ubicación</a>
     </div>
   </div>
 </div>
@@ -291,12 +292,12 @@ h1,h2,p {
 
 <!-- Buzón de Deseos -->
 <div class="half-screen deseos">
-  <img src="3 (1).jpg" alt="Fondo Deseos" class="img-portrait" />
+  <img src="3 (1).jpg" alt="Fondo Deseos" class="img-portrait"/>
   <div class="divisiones">
     <h1>Buzón de los Deseos</h1>
     <p>Me encantaría recibir tus buenos deseos en este día tan especial.</p>
     <div class="button-container">
-      <a href="#" class="custom-button wishes-button"><i class="fab fa-whatsapp"></i> Enviar Deseo</a>
+      <a href="https://wa.me/528187057608?text=¡Hola Frida! Quiero compartir contigo mis buenos deseos." target="_blank" class="custom-button wishes-button"><i class="fab fa-whatsapp"></i> Enviar Deseo</a>
     </div>
   </div>
 </div>
@@ -312,28 +313,35 @@ const progressBar = document.getElementById('progressBar');
 const resetBtn = document.getElementById('resetBtn');
 const copyBtn = document.getElementById('copyBtn');
 
-autoPlayButton.addEventListener('click', () => { miAudio.play(); autoPlayButton.style.display='none'; });
-function togglePlay(){ if(miAudio.paused){miAudio.play();playPauseBtn.innerText='⏸';}else{miAudio.pause();playPauseBtn.innerText='▶️';} }
+autoPlayButton.addEventListener('click', ()=>{ miAudio.play(); autoPlayButton.style.display='none'; });
+
+function togglePlay(){
+  if(miAudio.paused){ miAudio.play(); playPauseBtn.innerText='⏸'; } 
+  else{ miAudio.pause(); playPauseBtn.innerText='▶️'; }
+}
+
 function resetAudio(){ miAudio.currentTime=0; miAudio.play(); playPauseBtn.innerText='⏸'; }
-miAudio.addEventListener('timeupdate',()=>{ progressBar.value=(miAudio.currentTime/miAudio.duration)*100; });
-progressBar.addEventListener('input',()=>{ miAudio.currentTime=(progressBar.value/100)*miAudio.duration; });
-copyBtn.addEventListener('click',()=>{ navigator.clipboard.writeText('058597000053918934').then(()=>{ alert('Número copiado'); }); });
+
+miAudio.addEventListener('timeupdate', ()=>{ progressBar.value=(miAudio.currentTime/miAudio.duration)*100; });
+progressBar.addEventListener('input', ()=>{ miAudio.currentTime=(progressBar.value/100)*miAudio.duration; });
+
+copyBtn.addEventListener('click', ()=>{ navigator.clipboard.writeText('058597000053918934').then(()=>{ alert('Número copiado'); }); });
 
 // Contador
-const targetDate=new Date("August 31, 2025 17:00:00").getTime();
+const targetDate = new Date("August 31, 2025 17:00:00").getTime();
 function actualizarContador(){
-const now=new Date().getTime();
-const distance=targetDate-now;
-const dias=Math.floor(distance/(1000*60*60*24));
-const horas=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-const minutos=Math.floor((distance%(1000*60*60))/(1000*60));
-document.getElementById('dias').innerText=dias.toString().padStart(2,'0');
-document.getElementById('horas').innerText=horas.toString().padStart(2,'0');
-document.getElementById('minutos').innerText=minutos.toString().padStart(2,'0');
+  const now = new Date().getTime();
+  const distance = targetDate - now;
+  const dias = Math.floor(distance/(1000*60*60*24));
+  const horas = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+  const minutos = Math.floor((distance%(1000*60*60))/(1000*60));
+  document.getElementById('dias').innerText = dias.toString().padStart(2,'0');
+  document.getElementById('horas').innerText = horas.toString().padStart(2,'0');
+  document.getElementById('minutos').innerText = minutos.toString().padStart(2,'0');
 }
-setInterval(actualizarContador,1000);
+setInterval(actualizarContador, 1000);
 actualizarContador();
 </script>
+
 </body>
 </html>
-
