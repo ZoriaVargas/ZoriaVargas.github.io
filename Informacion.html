@@ -4,91 +4,110 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>XV Frida Rocha</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-zb9xO+g0s2rYV6zq8a6kG0C2kK/5ZMEqhw1HhBS1e8Vn1aS/5kI+qgT0ZtmkpC/+QZ+z6MXMfplu8J9iF77c+g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
   <style>
-    /* Variables de color */
     :root {
-      --rosegold-dark: #b76e79;
-      --dorado: #f8c8dc;
+      --rosegold-dark: #B76E79;
+      --dorado: #FFD700;
+      --verde-whatsapp: #25D366;
+      --verde-dark: #128C7E;
+      --texto-claro: #fff8f0;
     }
 
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
-      background-color: #fff;
+      font-family: 'Playfair Display', serif;
       overflow-x: hidden;
+      background: #000;
+      color: var(--texto-claro);
     }
 
-    /* Contenedores generales */
     .half-screen {
       position: relative;
       width: 100%;
       min-height: 100vh;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      overflow: hidden;
+      justify-content: center;
+      text-align: center;
     }
 
-    .img-portrait {
+    .half-screen img.img-portrait {
       position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      top: 0;
-      left: 0;
       z-index: -1;
+      filter: brightness(0.6);
     }
 
     .divisiones {
       position: relative;
-      z-index: 2;
-      width: 85%;
       max-width: 700px;
+      width: 90%;
       padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       text-align: center;
+      opacity: 1;
+      color: var(--texto-claro);
     }
 
-    .divisiones h1 {
-      font-size: 2em;
-      line-height: 1.4;
-      margin-bottom: 1rem;
-      color: #fff;
+    h1, h2, p {
+      margin: 0.5rem 0;
     }
 
-    .audio-wrapper {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      margin-top: 1rem;
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+
+    /* Botón iniciar experiencia */
+    #autoPlayButton {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, var(--rosegold-dark), var(--dorado));
+      color: white;
+      font-size: 1.5rem;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 6px 18px rgba(183,110,121,0.5);
+      animation: pulse 1.5s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { transform: translate(-50%, -50%) scale(1); }
+      100% { transform: translate(-50%, -50%) scale(1.05); }
     }
 
     /* Controles de audio */
     .custom-audio-controls {
       width: 100%;
       max-width: 280px;
+      margin: 1rem auto;
       padding: 0.9rem;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 0.8rem;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 200, 220, 0.15));
+      background: rgba(255,255,255,0.05);
       border-radius: 20px;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(183, 110, 121, 0.2);
-      box-shadow: 0 4px 12px rgba(183, 110, 121, 0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(183,110,121,0.2);
     }
 
     .custom-audio-controls button {
       width: 36px;
       height: 36px;
-      border-radius:50%;
+      border-radius: 50%;
       border: none;
       background: linear-gradient(45deg, var(--rosegold-dark), var(--dorado));
       color: white;
@@ -98,7 +117,6 @@
       align-items: center;
       justify-content: center;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(183, 110, 121, 0.2);
     }
 
     .custom-audio-controls button:hover {
@@ -117,70 +135,82 @@
 
     /* Botones */
     .custom-button {
+      padding: 0.8rem 1.5rem;
+      border-radius: 12px;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      padding: 1rem 2rem;
-      font-size: 1rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      text-decoration: none;
-      color: #fff;
       transition: all 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      font-family: 'Playfair Display', serif;
     }
 
     .location-button {
       background: linear-gradient(135deg, var(--rosegold-dark), var(--dorado));
-      box-shadow: 0 4px 12px rgba(183, 110, 121, 0.2);
     }
 
     .location-button:hover {
       background: linear-gradient(135deg, var(--dorado), var(--rosegold-dark));
-      box-shadow: 0 6px 16px rgba(183, 110, 121, 0.3);
       transform: translateY(-2px);
     }
 
     .wishes-button {
-      background: linear-gradient(135deg, #25D366, #128C7E);
-      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+      background: linear-gradient(135deg, var(--verde-whatsapp), var(--verde-dark));
     }
 
     .wishes-button:hover {
-      background: linear-gradient(135deg, #128C7E, #25D366);
-      box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+      background: linear-gradient(135deg, var(--verde-dark), var(--verde-whatsapp));
       transform: translateY(-2px);
     }
 
     .whatsapp-cancel {
       background-color: #FF4C4C;
+      font-weight: bold;
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: white;
+      text-decoration: none;
     }
 
-    /* Info secciones */
-    .info-section, .mesa-regalos, .cuenta-info, .restricted-notice, .dress-code {
-      background: rgba(255,255,255,0.85);
-      border-radius: 15px;
-      padding: 1.2rem;
-      margin: 1rem auto;
-      width: 85%;
-      max-width: 280px;
-      text-align: center;
+    .whatsapp-cancel:hover {
+      transform: translateY(-2px);
     }
 
-    .cuenta-info p {
-      font-size: 0.9em;
-      line-height: 1.5;
-      margin-bottom: 0.4rem;
+    .copy-button {
+      background: linear-gradient(135deg, var(--rosegold-dark), var(--dorado));
+      padding: 0.7rem 1rem;
+      border-radius: 12px;
+      color: white;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: bold;
+      transition: all 0.3s ease;
     }
 
-    .color-circle {
-      display: inline-block;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
+    .copy-button:hover {
+      background: linear-gradient(135deg, var(--dorado), var(--rosegold-dark));
+      transform: translateY(-2px);
     }
 
+    .button-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    /* Contador */
     .contador {
       display: flex;
       justify-content: center;
@@ -189,54 +219,56 @@
     }
 
     .contador-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: #fff;
+      text-align: center;
     }
 
     .contador-item .numero {
-      font-size: 1.5em;
+      font-size: 1.5rem;
       font-weight: bold;
     }
 
-    /* Botón flotante de música */
+    .contador-item .texto {
+      font-size: 0.9rem;
+    }
+
+    /* Floating Music Button */
     .floating-music {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
+      bottom: 1.5rem;
+      right: 1.5rem;
       width: 50px;
       height: 50px;
-      background: linear-gradient(45deg, var(--rosegold-dark), var(--dorado));
+      background: linear-gradient(135deg, var(--rosegold-dark), var(--dorado));
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(183, 110, 121, 0.3);
       z-index: 1000;
+      box-shadow: 0 4px 12px rgba(183,110,121,0.3);
+      transition: transform 0.3s ease;
     }
 
-    /* Escalado extra para móviles (1/3 menos) */
-    @media (max-width: 768px) {
-      .divisiones, .info-section, .mesa-regalos {
-        transform: scale(0.67);
-        transform-origin: top center;
-      }
-      #progressBar { max-width: 100px; }
-      .custom-button { padding: 0.6rem 1rem; font-size: 0.85rem; }
-      .custom-audio-controls { max-width: 200px; gap: 0.5rem; padding: 0.6rem; }
-      .custom-audio-controls button { width: 28px; height: 28px; font-size: 0.8rem; }
+    .floating-music:hover {
+      transform: scale(1.1);
     }
 
-    @media (max-width: 360px) {
-      .divisiones, .info-section, .mesa-regalos {
-        transform: scale(0.6);
-      }
+    /* Responsive */
+    @media (max-width: 480px) {
+      body { font-size: 0.75rem; }
+      .divisiones { padding: 1rem; }
+      #autoPlayButton { font-size: 1.2rem; padding: 0.8rem 1.5rem; }
+      .custom-audio-controls { padding: 0.6rem; gap: 0.5rem; }
+      .custom-audio-controls button { width: 28px; height: 28px; font-size: 0.85rem; }
+      #progressBar { max-width: 100px; height: 4px; }
+      .button-container .custom-button { font-size: 0.8rem; padding: 0.6rem 1rem; }
+      .contador-item .numero { font-size: 1.2rem; }
     }
   </style>
 </head>
 <body>
+
+  <!-- Botón Iniciar experiencia -->
   <button id="autoPlayButton">✨ Iniciar experiencia ✨</button>
 
   <!-- Pantalla Inicial -->
@@ -248,9 +280,9 @@
       <div class="audio-wrapper">
         <audio id="miAudio" src="lana del rey - salvatore (philipz flip).mp3"></audio>
         <div class="custom-audio-controls">
-          <button id="playPauseBtn" onclick="togglePlay()">▶️</button>
+          <button id="playPauseBtn" onclick="togglePlay()" title="Reproducir/Pausar">▶️</button>
           <input type="range" id="progressBar" value="0" min="0" max="100" />
-          <button id="resetBtn" onclick="resetAudio()">🔁</button>
+          <button id="resetBtn" onclick="resetAudio()" title="Reiniciar canción">🔁</button>
         </div>
       </div>
     </div>
@@ -259,11 +291,11 @@
   <!-- Pantalla Rosgold -->
   <div class="half-screen pantalla-rosgold">
     <img src="1.jpg" alt="Fondo Rosas" class="img-portrait"/>
-    <div class="divisiones" style="margin-top: 80rem;">
-      <img src="corona.png" alt="diseño" style="position: relative; width: 150px; margin-bottom: 2rem;">
-      <h1 style="font-size: 2.2em;">En este día tan especial, desde lo más profundo de mi alma quiero agradecer a mis padres por su amor incondicional...</h1>
+    <div class="divisiones">
+      <img src="corona.png" alt="diseño" style="width: 150px; margin-bottom: 2rem;">
+      <h1>En este día tan especial, agradezco a mis padres por su amor y apoyo incondicional</h1>
       <h1>con todo el corazón</h1>
-      <img src="pie.png" alt="diseño" style="position: relative; width: 120px; margin: 2rem 0;">
+      <img src="pie.png" alt="diseño" style="width: 120px; margin: 2rem 0;">
       <h1 class="nombre">Carmen Janeth Torres Luna</h1>
       <h1 class="nombre">Juan Miguel Rocha Velazco</h1>
     </div>
@@ -272,47 +304,35 @@
   <!-- Ceremonia -->
   <div class="half-screen celebracion">
     <img src="2 (1).jpg" alt="Fondo Ceremonia" class="img-portrait" />
-    <div class="divisiones" style="max-width: 500px;">
-      <h1 style="font-size: 3em;">Ceremonia</h1>
-      <div class="info-section">
-        <h2>📍 Misa</h2>
-        <div class="contador">
-          <div class="contador-item">
-            <span class="numero" id="dias">00</span>
-            <span class="texto">Días</span>
-          </div>
-          <div class="contador-item">
-            <span class="numero" id="horas">00</span>
-            <span class="texto">Horas</span>
-          </div>
-          <div class="contador-item">
-            <span class="numero" id="minutos">00</span>
-            <span class="texto">Minutos</span>
-          </div>
+    <div class="divisiones">
+      <h1>Ceremonia</h1>
+      <div class="contador">
+        <div class="contador-item">
+          <span class="numero" id="dias">00</span>
+          <span class="texto">Días</span>
         </div>
-        <p><strong>Fecha:</strong> 31 de Agosto de 2025</p>
-        <p><strong>Hora:</strong> 17:00 hrs</p>
-        <p><strong>Lugar:</strong> Iglesia de Nuestra Señora Del Perpetuo Socorro</p>
-        <p><strong>Dirección:</strong> Alejandro VI 304, Villa del Obispo, 66214 San Pedro Garza García, N.L.</p>
-
-        <div class="button-container">
-          <a href="https://maps.app.goo.gl/xefMnayaojpAtgYe7?g_st=awb" target="_blank" class="custom-button location-button">
-            <i class="fas fa-map-marker-alt"></i>
-            Ver ubicación
-          </a>
-          <a href="https://wa.me/528115048509?text=Confirmo%20mi%20asistencia%20a%20los%20XV%20de%20Frida" 
-            target="_blank" 
-            class="custom-button location-button whatsapp">
-            <i class="fab fa-whatsapp"></i>
-            Confirmar Asistencia
-          </a>
-          <a href="https://wa.me/528115048509?text=No%20podré%20asistir%20a%20los%20XV%20de%20Frida" 
-            target="_blank" 
-            class="custom-button whatsapp-cancel">
-            <i class="fab fa-whatsapp"></i>
-            No Podré Asistir
-          </a>
+        <div class="contador-item">
+          <span class="numero" id="horas">00</span>
+          <span class="texto">Horas</span>
         </div>
+        <div class="contador-item">
+          <span class="numero" id="minutos">00</span>
+          <span class="texto">Minutos</span>
+        </div>
+      </div>
+      <p><strong>Fecha:</strong> 31 de Agosto de 2025</p>
+      <p><strong>Hora:</strong> 17:00 hrs</p>
+      <p><strong>Lugar:</strong> Iglesia de Nuestra Señora Del Perpetuo Socorro</p>
+      <div class="button-container">
+        <a href="https://maps.app.goo.gl/xefMnayaojpAtgYe7?g_st=awb" target="_blank" class="custom-button location-button">
+          <i class="fas fa-map-marker-alt"></i> Ver ubicación
+        </a>
+        <a href="https://wa.me/528115048509?text=Confirmo%20mi%20asistencia%20a%20los%20XV%20de%20Frida" target="_blank" class="custom-button wishes-button">
+          <i class="fab fa-whatsapp"></i> Confirmar Asistencia
+        </a>
+        <a href="https://wa.me/528115048509?text=No%20podré%20asistir%20a%20los%20XV%20de%20Frida" target="_blank" class="custom-button whatsapp-cancel">
+          <i class="fab fa-whatsapp"></i> No Podré Asistir
+        </a>
       </div>
     </div>
   </div>
@@ -320,125 +340,131 @@
   <!-- Recepción -->
   <div class="half-screen celebracion">
     <img src="6.jpg" alt="Fondo Recepción" class="img-portrait" />
-    <div class="divisiones" style="max-width: 500px;">
-      <h1 style="font-size:3em;">Recepción</h1>
-      <div class="info-section">
-        <h2>📍 Salón de Eventos</h2>
-        <p><strong>Fecha:</strong> 31 de Agosto de 2025</p>
-        <p><strong>Hora:</strong> 19:00 hrs</p>
-        <p><strong>Lugar:</strong> La Cascada Onix y Ambar</p>
-        <p><strong>Dirección:</strong> esquina con, Tegucigalpa y Maravillas 1400, C. de las Artes, Zimix, 66358 Cdad. Santa Catarina, N.L.</p>
-
-        <div class="button-container">
-          <a href="https://maps.app.goo.gl/xHctfeogYbsG7HCT9?g_st=awb" target="_blank" class="custom-button location-button">
-            <i class="fas fa-map-marker-alt"></i>
-            Ver ubicación
-          </a>
-        </div>
+    <div class="divisiones">
+      <h1>Recepción</h1>
+      <p><strong>Fecha:</strong> 31 de Agosto de 2025</p>
+      <p><strong>Hora:</strong> 19:00 hrs</p>
+      <p><strong>Lugar:</strong> La Cascada Onix y Ambar</p>
+      <div class="button-container">
+        <a href="https://maps.app.goo.gl/xHctfeogYbsG7HCT9?g_st=awb" target="_blank" class="custom-button location-button">
+          <i class="fas fa-map-marker-alt"></i> Ver ubicación
+        </a>
       </div>
     </div>
   </div>
 
-  <!-- Mesa de Regalos -->
+  <!-- Mesa de regalos -->
   <div class="half-screen regalos">
     <img src="2.jpg" alt="Fondo Mesa de Regalos" class="img-portrait" />
-    <div class="divisiones" style="max-width: 700px;">
-      <h1 style="font-size: 3em;">Mesa de Regalos</h1>
-      <div class="mesa-regalos">
-        <p style="font-size: 1.2em; line-height: 1.6;">
-          Tu presencia es mi mejor regalo, pero si deseas obsequiarme algo más, agradezco tu detalle en efectivo o transferencia a la siguiente cuenta:
-        </p>
-        <div class="cuenta-info">
-          <p>
-            <strong>Banco:</strong> Banregio<br>
-            <strong>Titular:</strong> Frida Rocha<br>
-            <strong>Cuenta:</strong> 058597000053918934<br>
-          </p>
-          <a href="#" class="custom-button copy-button" id="copyBtn">
-            <i class="fas fa-copy"></i>
-            Copiar número
-          </a>
-        </div>
-      </div>
+    <div class="divisiones">
+      <h1>Mesa de Regalos</h1>
+      <p>Tu presencia es mi mejor regalo, pero si deseas obsequiarme algo más, agradezco tu detalle en efectivo o transferencia a la siguiente cuenta:</p>
+      <p><strong>Banco:</strong> Banregio<br>
+         <strong>Titular:</strong> Frida Rocha<br>
+         <strong>Cuenta:</strong> 058597000053918934
+      </p>
+      <a href="#" class="custom-button copy-button" id="copyBtn">
+        <i class="fas fa-copy"></i> Copiar número
+      </a>
     </div>
   </div>
 
-  <!-- Buzón de Deseos -->
+  <!-- Buzón de deseos -->
   <div class="half-screen deseos">
     <img src="3 (1).jpg" alt="Fondo Deseos" class="img-portrait" />
-    <div class="divisiones" style="max-width: 700px;">
-      <h1 style="font-size: 3em;">Buzón de los Deseos</h1>
-      <div class="info-section">
-        <p style="font-size: 1.2em; line-height: 1.6;">
-          Me encantaría recibir tus buenos deseos y mensajes en este día tan especial. Comparte conmigo tus palabras a través de WhatsApp.
-        </p>
-        <div class="button-container">
-          <a href="https://wa.me/528187057608?text=¡Hola Frida! Quiero compartir contigo mis deseos para tus XV años..." 
-             target="_blank" 
-             class="custom-button wishes-button">
-            <i class="fab fa-whatsapp"></i>
-            Enviar mensaje
-          </a>
-        </div>
+    <div class="divisiones">
+      <h1>Buzón de los Deseos</h1>
+      <p>Me encantaría recibir tus buenos deseos y mensajes en este día tan especial. Comparte conmigo tus palabras a través de WhatsApp.</p>
+      <div class="button-container">
+        <a href="https://wa.me/528187057608?text=¡Hola Frida! Quiero compartir contigo mis buenos deseos." target="_blank" class="custom-button wishes-button">
+          <i class="fab fa-whatsapp"></i> Enviar Deseo
+        </a>
       </div>
     </div>
   </div>
 
   <!-- Botón flotante música -->
-  <div class="floating-music" id="floatingMusicBtn">
-    <i class="fas fa-music"></i>
+  <div class="floating-music" onclick="togglePlay()">
+    <i class="fas fa-music" style="color:white;"></i>
   </div>
 
   <script>
-    const audio = document.getElementById("miAudio");
-    const playPauseBtn = document.getElementById("playPauseBtn");
-    const progressBar = document.getElementById("progressBar");
-    const resetBtn = document.getElementById("resetBtn");
-    const autoPlayButton = document.getElementById("autoPlayButton");
-    const floatingMusicBtn = document.getElementById("floatingMusicBtn");
+    const autoPlayButton = document.getElementById('autoPlayButton');
+    const miAudio = document.getElementById('miAudio');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const progressBar = document.getElementById('progressBar');
+    const resetBtn = document.getElementById('resetBtn');
+    const copyBtn = document.getElementById('copyBtn');
 
+    // Iniciar experiencia
+    autoPlayButton.addEventListener('click', () => {
+      miAudio.play();
+      autoPlayButton.style.display = 'none';
+    });
+
+    // Play/Pause
     function togglePlay() {
-      if(audio.paused) {
-        audio.play();
-        playPauseBtn.textContent = "⏸️";
-        floatingMusicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+      if (miAudio.paused) {
+        miAudio.play();
+        playPauseBtn.innerText = '⏸';
       } else {
-        audio.pause();
-        playPauseBtn.textContent = "▶️";
-        floatingMusicBtn.innerHTML = '<i class="fas fa-music"></i>';
+        miAudio.pause();
+        playPauseBtn.innerText = '▶️';
       }
     }
 
+    // Reset
     function resetAudio() {
-      audio.currentTime = 0;
-      if(audio.paused) togglePlay();
+      miAudio.currentTime = 0;
+      miAudio.play();
+      playPauseBtn.innerText = '⏸';
     }
 
-    audio.addEventListener("timeupdate", () => {
-      progressBar.value = (audio.currentTime / audio.duration) * 100;
+    // Actualizar barra de progreso
+    miAudio.addEventListener('timeupdate', () => {
+      const percent = (miAudio.currentTime / miAudio.duration) * 100;
+      progressBar.value = percent || 0;
     });
 
-    progressBar.addEventListener("input", () => {
-      audio.currentTime = (progressBar.value / 100) * audio.duration;
+    progressBar.addEventListener('input', () => {
+      miAudio.currentTime = (progressBar.value / 100) * miAudio.duration;
     });
-
-    autoPlayButton.addEventListener("click", () => {
-      audio.play().then(() => {
-        autoPlayButton.style.display = "none";
-        playPauseBtn.textContent = "⏸️";
-        floatingMusicBtn.innerHTML = '<i class="fas fa-pause"></i>';
-      }).catch(err => console.log("Autoplay blocked:", err));
-    });
-
-    floatingMusicBtn.addEventListener("click", togglePlay);
 
     // Copiar número
-    const copyBtn = document.getElementById("copyBtn");
-    copyBtn.addEventListener("click", () => {
-      navigator.clipboard.writeText("058597000053918934").then(() => {
-        alert("Número copiado al portapapeles!");
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText('058597000053918934').then(() => {
+        alert('Número copiado al portapapeles');
       });
     });
+
+    // Contador
+    const targetDate = new Date("August 31, 2025 17:00:00").getTime();
+    const diasEl = document.getElementById('dias');
+    const horasEl = document.getElementById('horas');
+    const minutosEl = document.getElementById('minutos');
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if(distance < 0){
+        diasEl.innerText = '00';
+        horasEl.innerText = '00';
+        minutosEl.innerText = '00';
+        return;
+      }
+
+      const dias = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+      diasEl.innerText = dias.toString().padStart(2,'0');
+      horasEl.innerText = horas.toString().padStart(2,'0');
+      minutosEl.innerText = minutos.toString().padStart(2,'0');
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
   </script>
 </body>
 </html>
